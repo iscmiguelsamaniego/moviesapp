@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="org.samtech.moviesapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="org.samtech.exam.ui.movies.HomeFragment"
+        android:label="@string/title_movies"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="org.samtech.moviesapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="org.samtech.exam.ui.user.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="org.samtech.moviesapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="org.samtech.exam.ui.locations.NotificationsFragment"
+        android:label="@string/title_locations"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

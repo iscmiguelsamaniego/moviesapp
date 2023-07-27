@@ -2,4 +2,54 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="gen_dimen_2">2dp</dimen>
+    <dimen name="gen_dimen_4">4dp</dimen>
+    <dimen name="gen_dimen_6">6dp</dimen>
+    <dimen name="gen_dimen_8">8dp</dimen>
+    <dimen name="gen_dimen_10">10dp</dimen>
+    <dimen name="gen_dimen_12">12dp</dimen>
+    <dimen name="gen_dimen_14">14dp</dimen>
+    <dimen name="gen_dimen_16">16dp</dimen>
+    <dimen name="gen_dimen_18">18dp</dimen>
+    <dimen name="gen_dimen_20">20dp</dimen>
+    <dimen name="gen_dimen_22">22dp</dimen>
+    <dimen name="gen_dimen_24">24dp</dimen>
+    <dimen name="gen_dimen_26">26dp</dimen>
+    <dimen name="gen_dimen_28">28dp</dimen>
+    <dimen name="gen_dimen_30">30dp</dimen>
+    <dimen name="gen_dimen_32">32dp</dimen>
+    <dimen name="gen_dimen_34">34dp</dimen>
+    <dimen name="gen_dimen_36">36dp</dimen>
+    <dimen name="gen_dimen_38">38dp</dimen>
+    <dimen name="gen_dimen_40">40dp</dimen>
+    <dimen name="gen_dimen_42">42dp</dimen>
+    <dimen name="gen_dimen_44">44dp</dimen>
+    <dimen name="gen_dimen_46">46dp</dimen>
+    <dimen name="gen_dimen_48">48dp</dimen>
+    <dimen name="gen_dimen_50">50dp</dimen>
+    <dimen name="gen_dimen_52">52dp</dimen>
+    <dimen name="gen_dimen_54">54dp</dimen>
+    <dimen name="gen_dimen_56">56dp</dimen>
+    <dimen name="gen_dimen_58">58dp</dimen>
+    <dimen name="gen_dimen_60">60dp</dimen>
+    <dimen name="gen_dimen_120">120dp</dimen>
+    <dimen name="gen_dimen_160">160dp</dimen>
+    <!-- Text dimentions. -->
+    <dimen name="gen_dimen_txt_12">12sp</dimen>
+    <dimen name="gen_dimen_txt_14">14sp</dimen>
+    <dimen name="gen_dimen_txt_16">16sp</dimen>
+    <dimen name="gen_dimen_txt_18">18sp</dimen>
+    <dimen name="gen_dimen_txt_20">20sp</dimen>
+    <dimen name="gen_dimen_txt_22">22sp</dimen>
+    <dimen name="gen_dimen_txt_24">24sp</dimen>
+    <dimen name="gen_dimen_txt_26">26sp</dimen>
+    <dimen name="gen_dimen_txt_28">28sp</dimen>
+    <dimen name="gen_dimen_txt_30">30sp</dimen>
+    <dimen name="gen_dimen_txt_32">32sp</dimen>
+    <dimen name="gen_dimen_txt_34">34sp</dimen>
+    <dimen name="gen_dimen_txt_36">36sp</dimen>
+    <dimen name="gen_dimen_txt_38">38sp</dimen>
+    <dimen name="gen_dimen_txt_40">40sp</dimen>
 </resources>

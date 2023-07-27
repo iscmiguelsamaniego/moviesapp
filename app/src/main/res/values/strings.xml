@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">moviesapp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Exam</string>
+    <string name="title_movies">Peliculas</string>
+    <string name="title_user">Usuario</string>
+    <string name="title_locations">Ubicaciones</string>
+    <string name="user_image">Imágen del usuario</string>
 </resources>
