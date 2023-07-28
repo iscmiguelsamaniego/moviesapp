@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18163776309",
+    "project_id": "apexam-7e745",
+    "storage_bucket": "apexam-7e745.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18163776309:android:ff8df73236d4de993c2a7c",
+        "android_client_info": {
+          "package_name": "org.samtech.exam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18163776309-tv62tg7a5cn6vp4hufdnh6jvn3l0cb8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPJ6RxWAMJapCY3vFLQtPJdZ8T3IlVVic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18163776309-tv62tg7a5cn6vp4hufdnh6jvn3l0cb8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
