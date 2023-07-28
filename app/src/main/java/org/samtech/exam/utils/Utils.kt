@@ -1,40 +1,60 @@
 package org.samtech.exam.utils
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
+import android.os.SystemClock
+import android.text.Html
+import android.text.Spanned
 import android.view.Gravity
-import android.view.Window
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import org.samtech.exam.R
 
 object Utils {
-    fun toast(ctx: Context?, message: String?) {
-        if (ctx != null) {
-            val toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show()
+    private var mLastClickTime: Long = 0
+
+    fun setGlideImage(paramContext: Context, paramUrl: String, paramImageView: ImageView) {
+        Glide
+            .with(paramContext)
+            .load(paramUrl)
+            .placeholder(R.drawable.ic_no_image)
+            .into(paramImageView)
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    fun setHtml(tView: TextView, paramContent: String?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tView.setText(Html.fromHtml(paramContent, Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            tView.setText(Html.fromHtml(paramContent));
         }
     }
 
-    fun showAlertWithAction(
-        paramContext: Context,
-        paramScreenShootUrl: String
-    ) {
-        val customDialog = Dialog(paramContext)
-        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        customDialog.setCancelable(false)
-        customDialog.setContentView(R.layout.custom_dialog)
-        /*val screenShoot =
-            customDialog.findViewById(R.id.custom_dialog_app_screen_shoot) as ImageView*/
 
-
-
-        /*btnClose.setOnClickListener {
-            customDialog.dismiss()
-        }*/
-
-
-        customDialog.setCancelable(false)
-        customDialog.show()
+    fun getSpannedText(text: String) : Spanned{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT);
+        } else {
+            return Html.fromHtml(text);
+        }
     }
+
+    fun mayTapButton(time: Long): Boolean {
+        return if (SystemClock.elapsedRealtime() - mLastClickTime < time) {
+            false
+        } else {
+            mLastClickTime = SystemClock.elapsedRealtime()
+            true
+        }
+    }
+
+    fun customToast(ctx: Context, message: String?) {
+        val toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.show()
+    }
+
 }

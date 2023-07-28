@@ -5,11 +5,19 @@ import android.text.TextUtils
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import org.samtech.exam.firebase.repositories.FirebaseUserRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import org.samtech.exam.database.MoviesRoomDatabase
+import org.samtech.exam.firebase.repositories.FireStoreUserRepository
+import org.samtech.exam.repositories.ResultsRepository
 
 class Singleton : Application() {
 
-    val firebaseUserRepository by lazy { FirebaseUserRepository() }
+    val applicationScope = CoroutineScope(SupervisorJob())
+    val database by lazy { MoviesRoomDatabase.getDataBase(this, applicationScope) }
+    val resultsRepository by lazy { ResultsRepository(database.resultsDao()) }
+    val fireStoreUserRepository by lazy { FireStoreUserRepository() }
+
 
     override fun onCreate() {
         super.onCreate()

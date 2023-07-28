@@ -9,7 +9,7 @@ import org.samtech.exam.network.pokos.UserPoko
 import org.samtech.exam.utils.Constants.COLLECTION_USER
 import org.samtech.exam.utils.Constants.KEY_AVATAR
 
-class FirebaseUserRepository : UserRepository {
+class FireStoreUserRepository : UserRepository {
 
     var db = FirebaseFirestore.getInstance()
 
