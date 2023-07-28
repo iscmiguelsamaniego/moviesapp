@@ -15,8 +15,8 @@ Apis
 
   https://firebase.google.com
   
-      - Cloud Messagging (FCM)
-      - Store
+      - Firebase Cloud Messaging
+      - FireStore
 
 Librerias 
 
