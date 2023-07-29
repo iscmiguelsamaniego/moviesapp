@@ -1,5 +1,6 @@
 package org.samtech.exam
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,9 +23,11 @@ class MovieDetailViewModel(private val reviewsRepo: ReviewsRepositor) : ViewMode
     fun deleteAllReviews() = viewModelScope.launch {
         reviewsRepo.deleteAll()
     }
+
     fun insertReviews(reviews: Reviews) = viewModelScope.launch {
         reviewsRepo.insert(reviews)
     }
+
 
     fun downloadReviewValues(idMovieParam: String) {
         val ctx = Singleton.instance?.applicationContext

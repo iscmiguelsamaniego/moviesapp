@@ -1,6 +1,7 @@
 package org.samtech.exam.repositories
 
 import androidx.annotation.WorkerThread
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import org.samtech.exam.database.dao.ReviewsDao
 import org.samtech.exam.database.entities.Reviews

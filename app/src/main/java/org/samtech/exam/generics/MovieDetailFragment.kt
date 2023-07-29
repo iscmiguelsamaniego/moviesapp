@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -46,12 +47,12 @@ class MovieDetailFragment : Fragment() {
         movieOverviewTView = root.findViewById(R.id.fr_movie_detail_overview)
         rvReviews = root.findViewById(R.id.fr_user_reviews_recyclerview)
 
+        (activity as AppCompatActivity).supportActionBar?.title = "Descripción"
         setupValues(inflater.context)
-
         return root
     }
 
-    private fun setupReviews(ctx : Context) {
+    private fun setupReviews() {
         val adapter = ReviewsAdapter()
         rvReviews.adapter = adapter
         rvReviews.layoutManager =
@@ -108,10 +109,17 @@ class MovieDetailFragment : Fragment() {
             Utils.getSpannedText(ctx.getString(R.string.description, overviewArg))
 
         if (isOnline(ctx)) {
+            var isInsertOp = false
+            opMoviewDetailsViewModel.reviewsCount.observe(viewLifecycleOwner) { reviews ->
+                reviews?.let {
+                    isInsertOp = it.get(0) == 0
+                }
+            }
+
             opMoviewDetailsViewModel.downloadReviewValues(idArg!!)
         }
 
-        setupReviews(ctx)
+        setupReviews()
 
     }
 }

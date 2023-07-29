@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +25,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navView = findViewById(R.id.nav_view)
+
+        appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_movies,
+            R.id.navigation_user,
+            R.id.navigation_locations))
+
         setupNavigation()
     }
 
     private fun setupNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph).build()
         setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
