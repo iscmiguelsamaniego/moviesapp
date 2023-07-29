@@ -107,8 +107,6 @@ class UserFragment : Fragment() {
     private fun populateRatedList() {
         val adapter = RatedAdapter()
         rvBestRated.adapter = adapter
-        //rvBestRated.layoutManager =
-          //  LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvBestRated.layoutManager = GridLayoutManager(context, 2)
 
         opUserViewModel.allResults.observe(viewLifecycleOwner) { results ->
@@ -119,7 +117,7 @@ class UserFragment : Fragment() {
 
         adapter.onDetailClick = {results ->
             val bundle = bundleOf(
-                "id" to results.id,
+                "id" to results.id.toString(),
                 "adult" to results.adult,
                 "backdropPath" to results.backdropPath,
                 "originalLanguage" to results.originalLanguage,
@@ -130,9 +128,9 @@ class UserFragment : Fragment() {
                 "releaseDate" to results.releaseDate,
                 "title" to results.title,
                 "video" to results.video,
-                "voteAverage" to results.voteAverage,
-                "voteCount" to results.voteCount,
-                "rating" to results.rating)
+                "voteAverage" to results.voteAverage.toString(),
+                "voteCount" to results.voteCount.toString(),
+                "rating" to results.rating.toString())
             view?.findNavController()?.navigate(R.id.action_open_movie_detail, bundle)
 
         }

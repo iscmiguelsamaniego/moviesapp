@@ -32,7 +32,6 @@
             app:cardPreventCornerOverlap="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -100,7 +99,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/gen_dimen_16"
-
             app:cardBackgroundColor="@color/blue_ligth"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,76 +107,12 @@
             tools:cardCornerRadius="@dimen/gen_dimen_16"
             tools:cardElevation="@dimen/gen_dimen_2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fr_user_reviews_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/gen_dimen_8">
-
-                <ImageView
-                    android:id="@+id/fr_movie_detail_icon_review"
-                    android:layout_width="@dimen/gen_dimen_60"
-                    android:layout_height="@dimen/gen_dimen_60"
-                    android:contentDescription="@string/poster_image"
-                    android:src="@drawable/ic_user"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fr_movie_detail_title_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/fr_movie_detail_review_subtitlte_details"
-                    app:layout_constraintEnd_toStartOf="@+id/fr_movie_detail_review_score"
-                    app:layout_constraintStart_toEndOf="@+id/fr_movie_detail_icon_review"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fr_movie_detail_review_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/fr_movie_detail_review_subtitlte_details"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fr_movie_detail_title_review"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fr_movie_detail_review_subtitlte_details"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/gen_dimen_6"
-                    android:paddingBottom="@dimen/gen_dimen_12"
-                    android:textSize="@dimen/gen_dimen_txt_12"
-                    app:layout_constraintBottom_toTopOf="@+id/fr_movie_detail_review"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fr_movie_detail_icon_review"
-                    app:layout_constraintTop_toBottomOf="@+id/fr_movie_detail_review_score" />
-
-                <TextView
-                    android:id="@+id/fr_movie_detail_review"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="5"
-                    android:textSize="@dimen/gen_dimen_txt_12"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fr_movie_detail_icon_review"
-                    app:layout_constraintTop_toBottomOf="@+id/fr_movie_detail_review_subtitlte_details" />
-
-                <Button
-                    android:id="@+id/fr_movie_detail_view_all_reviews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/gen_dimen_6"
-                    android:background="@drawable/btn_selector"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fr_movie_detail_review" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_centerInParent="true"
+                android:padding="16dp" />
 
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

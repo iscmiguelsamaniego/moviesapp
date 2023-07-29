@@ -9,7 +9,9 @@ object Constants {
     const val POPULAR_PATH = "/movie/popular?language=es"
     const val BEST_RATED_PATH = "/movie/top_rated?language=es"
     const val BEST_RECOMMENDED_PATH = "/movie/now_playing?language=es"
-    
+    const val REVIEWS_PATH_A = "/movie/"
+    const val REVIEWS_PATH_B = "/reviews"
+
     val AUTHORIZATION = "Authorization"
     val BEARER = "Bearer "
     val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjI3ODUxMzgzOTBiMTc4MTUzNmQ4NzQ1ZmJkMjEzNSIsInN1YiI6IjY0YjcxOTg2YTU3NDNkMDBhY2I1ZTY1ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.X4uDfBK4W9rwbGKS5oxS6k3YGOCuZVJy9g8Wthzxne8"
@@ -17,5 +19,5 @@ object Constants {
     val COLLECTION_USER = "users"
     val KEY_AVATAR = "avatar"
 
-    //     --url https://api.themoviedb.org/3/movie/105/reviews \
+
 }
