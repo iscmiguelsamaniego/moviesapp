@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.samtech.exam.MovieDetailViewModel
 import org.samtech.exam.R
@@ -18,8 +19,7 @@ import org.samtech.exam.utils.Utils.setGlideImage
 
 class MovieDetailFragment : Fragment() {
 
-    //private lateinit var backdropIView: ImageView
-    private lateinit var backdropIView: ConstraintLayout
+    private lateinit var backdropIView: ImageView
     private lateinit var posterIView: ImageView
     private lateinit var movieOverviewTView: TextView
     private lateinit var descriptionTView: TextView
@@ -31,9 +31,6 @@ class MovieDetailFragment : Fragment() {
     private lateinit var detailReviewTView: TextView
     private lateinit var viewAllReviewsBtn: Button
 
-    companion object {
-        fun newInstance() = MovieDetailFragment()
-    }
 
     private lateinit var viewModel: MovieDetailViewModel
 
@@ -42,7 +39,7 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_movie_detail, container, false)
-        backdropIView = root.findViewById(R.id.fr_movie_detail_backdrop)
+        backdropIView = root.findViewById(R.id.fragment_item_movie_backdrop)
         posterIView = root.findViewById(R.id.rated_item_poster)
         descriptionTView = root.findViewById(R.id.fr_movie_in_details)
         movieOverviewTView = root.findViewById(R.id.fr_movie_detail_overview)
@@ -76,10 +73,18 @@ class MovieDetailFragment : Fragment() {
         val voteCountArg = arguments?.getString("voteCount").toString()
         val ratingArg = arguments?.getString("rating").toString()
 
-        //setGlideImage(ctx, BASE_IMAGE_PATH+backdropPathArg, backdropIView)
+        backdropIView.setImageDrawable(
+            AppCompatResources.getDrawable(ctx, R.drawable.gradient_backdrop))
+
+        setGlideImage(ctx, BASE_IMAGE_PATH+backdropPathArg, backdropIView)
 
         setGlideImage(ctx, BASE_IMAGE_PATH+posterPathArg, posterIView)
 
+
+
+        //android:src="@drawable/gradient_backdrop"
+
+        //detailReviewTView.text = overviewArg
         descriptionTView.text =
             Utils.getSpannedText(ctx.getString(R.string.details_movie, titleOriginalArg,  releaseArg, ratingArg, voteArg, languajeArg))
 

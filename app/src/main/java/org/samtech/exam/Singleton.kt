@@ -8,15 +8,17 @@ import com.android.volley.toolbox.Volley
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.samtech.exam.database.MoviesRoomDatabase
-import org.samtech.exam.firebase.repositories.FireStoreUserRepository
+import org.samtech.exam.firebase.repositories.FireStoreLocationsRepository
 import org.samtech.exam.repositories.ResultsRepository
+import org.samtech.exam.repositories.UsersRepository
 
 class Singleton : Application() {
 
     val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { MoviesRoomDatabase.getDataBase(this, applicationScope) }
+    val usersRepository by lazy { UsersRepository(database.usersDao()) }
     val resultsRepository by lazy { ResultsRepository(database.resultsDao()) }
-    val fireStoreUserRepository by lazy { FireStoreUserRepository() }
+    val fireStoreLocationsRepository by lazy { FireStoreLocationsRepository() }
 
 
     override fun onCreate() {

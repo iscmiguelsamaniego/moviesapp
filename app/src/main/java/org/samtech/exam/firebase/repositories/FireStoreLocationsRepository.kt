@@ -1,34 +1,60 @@
 package org.samtech.exam.firebase.repositories
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
-import org.samtech.exam.firebase.models.FSAvatar
-import org.samtech.exam.firebase.models.FSUser
-import org.samtech.exam.interfaces.UserRepository
+import org.samtech.exam.firebase.models.FSLocations
+import org.samtech.exam.interfaces.LocationsRepository
 import org.samtech.exam.network.pokos.UserPoko
 import org.samtech.exam.utils.Constants.COLLECTION_USER
-import org.samtech.exam.utils.Constants.KEY_AVATAR
 
-class FireStoreUserRepository : UserRepository {
+class FireStoreLocationsRepository : LocationsRepository {
 
     var db = FirebaseFirestore.getInstance()
 
-    override fun getUserValues(listener: UserRepository.UserListener): String {
+    /*
+       /*if (it.fsDocumentId == null) {
+       //TODO IMPLEMENT THIS FOR UPDATE ON FIRESTORE
+
+                    opUserViewModel.downloadAndStoreOrUpdateUser("")
+                } else {
+                    opUserViewModel.downloadAndStoreOrUpdateUser(it.fsDocumentId!!)
+                }*/
+
+                val urlImage = BASE_IMAGE_PATH + user.avatar!!.tmdb.avatarPath!!
+                setGlideImage(ctx, urlImage, userIView)
+
+                val adultResponse =
+                    if (it.includeAdult == true)
+                        getString(R.string.yes) else getString(R.string.no)
+
+                val nameRespose =
+                    if(it.name.isNullOrBlank())
+                        getString(R.string.no_registered) else it.name
+
+                val x = getSpannedText(getString(R.string.user_values,
+                    it.username,
+                    it.id.toString(),
+                    it.iso31661,
+                    it.iso6391,
+                    nameRespose,
+                    adultResponse))
+                userInfoTView.text = x
+    * */
+    override fun getLocationsValues(listener: LocationsRepository.LocationsListener): String {
         var getResult = ""
 
         db.collection(COLLECTION_USER)
             .get()
             .addOnSuccessListener { result ->
                 if(!result.isEmpty) {
-                    val gson = Gson()
+                  /*  val gson = Gson()
                     for (document in result) {
                         val user = gson.toJson(document.data).toString()
-                        val userAux = gson.fromJson(user, FSUser::class.java)
+                        val userAux = gson.fromJson(user, FSLocations::class.java)
                         val avatarObj = gson.toJson(document.data.getValue(KEY_AVATAR)).toString()
-                        val avatar = gson.fromJson(avatarObj, FSAvatar::class.java)
+                        val avatar = gson.fromJson(avatarObj, Avatar::class.java)
 
-                        listener.onUserResult(
-                            FSUser(
+                        listener.onLocationsResult(
+                            FSLocations(
                                 fsDocumentId = document.id,
                                 avatar = avatar,
                                 id = userAux.id,
@@ -39,9 +65,9 @@ class FireStoreUserRepository : UserRepository {
                                 username = userAux.username
                             )
                         )
-                    }
+                    }*/
                 }else{
-                    listener.onUserResult(FSUser())
+                    listener.onLocationsResult(FSLocations())
                 }
             }
             .addOnFailureListener { e ->
@@ -51,7 +77,7 @@ class FireStoreUserRepository : UserRepository {
         return getResult
     }
 
-    override fun updateUserValues(userId: String, user: UserPoko): String {
+    override fun updateLocationsValues(userId: String, user: UserPoko): String {
         var updateResult = ""
 
         db.collection(COLLECTION_USER).document(userId).set(user)
@@ -65,7 +91,7 @@ class FireStoreUserRepository : UserRepository {
         return updateResult
     }
 
-    override fun storeUserValues(user: UserPoko): String {
+    override fun storeLocationsValues(user: UserPoko): String {
         var storeResult = ""
 
         db.collection(COLLECTION_USER)

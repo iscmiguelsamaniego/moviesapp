@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fr_movie_detail_backdrop"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/fragment_item_movie_backdrop"
             android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:background="@drawable/backdropsample"
+            android:layout_height="@dimen/gen_dimen_200"
             android:contentDescription="@string/backdrop_image"
-            android:scaleType="centerCrop"
-            android:src="@drawable/backdropsample"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:background="@drawable/backdropsample"
+            tools:src="@drawable/gradient_backdrop" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fragment_item_movie_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/gen_dimen_16"
+            app:cardCornerRadius="@dimen/gen_dimen_8"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/rated_item_poster"
-            android:layout_width="@dimen/gen_dimen_110"
-            android:layout_height="@dimen/gen_dimen_150"
-            android:layout_marginStart="@dimen/gen_dimen_16"
-            android:contentDescription="@string/poster_image"
-            android:elevation="@dimen/gen_dimen_6"
-            android:src="@drawable/postersample"
-            app:layout_constraintStart_toStartOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/rated_item_poster"
+                    android:layout_width="@dimen/gen_dimen_120"
+                    android:layout_height="@dimen/gen_dimen_190"
+                    android:contentDescription="@string/poster_image"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/postersample"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/fr_movie_in_details"
@@ -48,21 +63,20 @@
             android:textColor="@color/light_font"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/fr_movie_detail_cv_overview"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toEndOf="@+id/rated_item_poster"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.454" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_item_movie_detail"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fr_movie_detail_cv_overview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/gen_dimen_16"
+
             app:cardBackgroundColor="@color/blue_ligth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rated_item_poster"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_item_movie_detail"
             tools:cardCornerRadius="@dimen/gen_dimen_16"
             tools:cardElevation="@dimen/gen_dimen_2">
 
@@ -85,7 +99,8 @@
             android:id="@+id/fr_movie_detail_cv_reviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_margin="@dimen/gen_dimen_16"
+
             app:cardBackgroundColor="@color/blue_ligth"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -168,4 +183,4 @@
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

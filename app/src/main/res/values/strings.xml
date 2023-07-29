@@ -14,4 +14,6 @@
      <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="no_registered">No registrado</string>
+    <string name="no_internet">No se detecta conexión a internet</string>
+    <string name="rated_by_me">Peliculas calificadas por mi</string>
 </resources>

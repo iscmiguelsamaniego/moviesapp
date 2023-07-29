@@ -39,6 +39,7 @@
     <dimen name="gen_dimen_120">120dp</dimen>
     <dimen name="gen_dimen_140">140dp</dimen>
     <dimen name="gen_dimen_160">160dp</dimen>
+    <dimen name="gen_dimen_190">190dp</dimen>
     <!-- Text dimentions. -->
     <dimen name="gen_dimen_txt_12">12sp</dimen>
     <dimen name="gen_dimen_txt_14">14sp</dimen>
@@ -61,4 +62,5 @@
     <dimen name="gen_dimen_150">150dp</dimen>
     <dimen name="gen_dimen_45">45dp</dimen>
     <dimen name="gen_dimen_31">31dp</dimen>
+    <dimen name="gen_dimen_200">200dp</dimen>
 </resources>

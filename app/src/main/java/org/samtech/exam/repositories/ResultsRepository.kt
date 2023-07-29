@@ -11,10 +11,6 @@ class ResultsRepository(private val resultsDao : ResultsDao) {
         return resultsDao.getResults()
     }
 
-    suspend fun deleteResultsValues(){
-        resultsDao.deleteAll()
-    }
-
     @WorkerThread
     suspend fun insert(results : Results){
         resultsDao.insert(results)

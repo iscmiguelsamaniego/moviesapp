@@ -8,25 +8,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.samtech.exam.R
 import org.samtech.exam.Singleton
 import org.samtech.exam.ui.adapters.RatedAdapter
 import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
+import org.samtech.exam.utils.NetworkUtils.isOnline
+import org.samtech.exam.utils.Utils.customToast
 import org.samtech.exam.utils.Utils.getSpannedText
 import org.samtech.exam.utils.Utils.setGlideImage
+
 
 class UserFragment : Fragment() {
 
     private val opUserViewModel: UserViewModel by activityViewModels {
         UserViewModel.UserViewModelFactory(
-            Singleton.instance!!.fireStoreUserRepository,
+            Singleton.instance!!.usersRepository,
             Singleton.instance!!.resultsRepository
         )
     }
@@ -45,56 +46,76 @@ class UserFragment : Fragment() {
         userIView = root.findViewById(R.id.fr_user_image)
         userInfoTView = root.findViewById(R.id.fr_user_info_tview)
 
+        if(isOnline(context)) {
+            opUserViewModel.downloadUserValues()
+            opUserViewModel.downloadRatedValues()
+        }else{
+            customToast(requireContext(), getString(R.string.no_internet))
+        }
+
         setUpUserDetails(inflater.context)
         populateRatedList()
         return root
     }
 
     private fun setUpUserDetails(ctx : Context) {
-        opUserViewModel.getUserFSValues().observe(viewLifecycleOwner) { user ->
-            user.let {
-                if (it.fsDocumentId == null) {
-                    opUserViewModel.downloadAndStoreOrUpdateUser("")
-                } else {
-                    opUserViewModel.downloadAndStoreOrUpdateUser(it.fsDocumentId!!)
+        opUserViewModel.allUsers.observe(viewLifecycleOwner){users ->
+            users.let{
+
+                var urlAvatar = ""
+                var adultValue : Boolean? = false
+                var nameValue = ""
+                var userNameValue = ""
+                var idValue = ""
+                var iso31661Value = ""
+                var iso6391Value = ""
+
+                for (user in it){ //TODO FIX
+                    urlAvatar = BASE_IMAGE_PATH+ user.avatarPath
+                    adultValue = user.includeAdult
+                    nameValue = user.name.toString()
+                    userNameValue = user.username.toString()
+                    idValue = user.id.toString()
+                    iso31661Value = user.iso31661.toString()
+                    iso6391Value = user.iso6391.toString()
                 }
 
-                val urlImage = BASE_IMAGE_PATH + user.avatar!!.tmdb.avatarPath!!
-                setGlideImage(ctx, urlImage, userIView)
+                setGlideImage(ctx, urlAvatar, userIView)
+
 
                 val adultResponse =
-                if (it.includeAdult == true)
-                    getString(R.string.yes) else getString(R.string.no)
+                    if (adultValue == true)
+                        getString(R.string.yes) else getString(R.string.no)
 
                 val nameRespose =
-                    if(it.name.isNullOrBlank())
-                        getString(R.string.no_registered) else it.name
+                    if(nameValue.isNullOrBlank())
+                        getString(R.string.no_registered) else nameValue
 
-                val x = getSpannedText(getString(R.string.user_values,
-                    it.username,
-                    it.id.toString(),
-                    it.iso31661,
-                    it.iso6391,
+                val profileUser = getSpannedText(getString(R.string.user_values,
+                    userNameValue,
+                    idValue,
+                    iso31661Value,
+                    iso6391Value,
                     nameRespose,
                     adultResponse))
-                userInfoTView.text = x
+                userInfoTView.text = profileUser
             }
         }
 
-        opUserViewModel.getRatedValues()
     }
 
     private fun populateRatedList() {
         val adapter = RatedAdapter()
         rvBestRated.adapter = adapter
-        rvBestRated.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        //rvBestRated.layoutManager =
+          //  LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvBestRated.layoutManager = GridLayoutManager(context, 2)
 
-        opUserViewModel.allResults.observe(viewLifecycleOwner, Observer { results ->
-            results?.let{
+        opUserViewModel.allResults.observe(viewLifecycleOwner) { results ->
+            results?.let {
                 adapter.submitList(it)
             }
-        })
+        }
 
         adapter.onDetailClick = {results ->
             val bundle = bundleOf(

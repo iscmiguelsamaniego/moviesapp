@@ -9,7 +9,7 @@ class Results(
     @PrimaryKey @ColumnInfo(name = "id") val id: Int?,
     @ColumnInfo("adult") var adult: Boolean?,
     @ColumnInfo("backdropPath") var backdropPath: String?,
-    //@ColumnInfo("genreIds") var genreIds: ArrayList<Int> = arrayListOf(),
+    @ColumnInfo("genreIds") var genreIds: String,
     @ColumnInfo("originalLanguage") var originalLanguage: String?,
     @ColumnInfo("originalTitle") var originalTitle: String?,
     @ColumnInfo("overview") var overview: String?,

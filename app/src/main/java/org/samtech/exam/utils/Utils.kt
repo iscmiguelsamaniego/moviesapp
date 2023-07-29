@@ -2,6 +2,7 @@ package org.samtech.exam.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.SystemClock
 import android.text.Html
@@ -23,16 +24,6 @@ object Utils {
             .placeholder(R.drawable.ic_no_image)
             .into(paramImageView)
     }
-
-    @SuppressLint("ObsoleteSdkInt")
-    fun setHtml(tView: TextView, paramContent: String?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tView.setText(Html.fromHtml(paramContent, Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            tView.setText(Html.fromHtml(paramContent));
-        }
-    }
-
 
     fun getSpannedText(text: String) : Spanned{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

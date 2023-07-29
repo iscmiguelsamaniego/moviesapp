@@ -6,17 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import org.samtech.exam.database.entities.Results
+import org.samtech.exam.database.entities.Users
 
 @Dao
-interface ResultsDao {
-    @Query("SELECT COUNT(*) FROM results")
-    fun getResultsCount(): Int
+interface UsersDao {
+    @Query("SELECT COUNT(*) FROM users")
+    fun getUsersCount(): Int
 
-    @Query("SELECT * FROM results ORDER BY id DESC")
-    fun getResults(): Flow<List<Results>>
+    @Query("SELECT * FROM users ORDER BY id DESC")
+    fun getUsers(): Flow<List<Users>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(results: Results)
+    suspend fun insert(users: Users)
 
 }

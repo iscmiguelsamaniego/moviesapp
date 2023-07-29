@@ -8,15 +8,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.samtech.exam.database.dao.ResultsDao
+import org.samtech.exam.database.dao.UsersDao
 import org.samtech.exam.database.entities.Results
+import org.samtech.exam.database.entities.Users
+
 @Database(
-entities = [Results::class],
+entities = [Users::class, Results::class],
 version = 1,
 exportSchema = false
 )
 abstract class MoviesRoomDatabase : RoomDatabase() {
 
     abstract fun resultsDao() : ResultsDao
+    abstract fun usersDao() : UsersDao
 
     companion object{
         @Volatile
