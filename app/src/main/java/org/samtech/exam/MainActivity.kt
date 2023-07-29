@@ -24,16 +24,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-       /* val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_movies, R.id.navigation_user, R.id.navigation_locations
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)*/
         setupNavigation()
     }
 

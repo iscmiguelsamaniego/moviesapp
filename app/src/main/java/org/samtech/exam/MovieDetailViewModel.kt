@@ -17,9 +17,13 @@ import org.samtech.exam.utils.Constants
 class MovieDetailViewModel(private val reviewsRepo: ReviewsRepositor) : ViewModel() {
 
     val allReviews: LiveData<List<Reviews>> = reviewsRepo.getReviews().asLiveData()
+    val reviewsCount: LiveData<List<Int>> = reviewsRepo.getCount().asLiveData()
 
-    fun insertReviews(revies: Reviews) = viewModelScope.launch {
-        reviewsRepo.insert(revies)
+    fun deleteAllReviews() = viewModelScope.launch {
+        reviewsRepo.deleteAll()
+    }
+    fun insertReviews(reviews: Reviews) = viewModelScope.launch {
+        reviewsRepo.insert(reviews)
     }
 
     fun downloadReviewValues(idMovieParam: String) {
@@ -31,7 +35,6 @@ class MovieDetailViewModel(private val reviewsRepo: ReviewsRepositor) : ViewMode
             val pathReviews = Constants.REVIEWS_PATH_A + idMovieParam + Constants.REVIEWS_PATH_B
             apiController.getString(pathReviews, Constants.TOKEN) { response ->
                 if (!response.isNullOrBlank()) {
-
                     val reviewsResponse = Gson().fromJson(response, ReviewsPoko::class.java)
                     for (results in reviewsResponse.results) {
                         insertReviews(

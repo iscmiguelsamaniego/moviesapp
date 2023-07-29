@@ -49,10 +49,10 @@ class ReviewsAdapter() :
         }
 
         companion object {
-            fun create(parent: ViewGroup): ReviewsAdapter.ReviewsViewsHolder {
+            fun create(parent: ViewGroup): ReviewsViewsHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.reviews_item, parent, false)
-                return ReviewsAdapter.ReviewsViewsHolder(view)
+                return ReviewsViewsHolder(view)
             }
         }
 

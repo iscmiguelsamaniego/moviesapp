@@ -53,6 +53,7 @@ abstract class MoviesRoomDatabase : RoomDatabase() {
                 super.onCreate(db)
 
                 INSTANCE?.let{ database ->
+
                     scope.launch{
                         database.clearAllTables()
                     }

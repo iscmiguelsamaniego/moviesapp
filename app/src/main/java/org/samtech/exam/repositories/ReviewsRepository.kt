@@ -16,7 +16,12 @@ class ReviewsRepositor(private val reviewsDao: ReviewsDao) {
         reviewsDao.insert(reviews)
     }
 
-    suspend fun getCount() : Int{
+    @WorkerThread
+    suspend fun deleteAll(){
+        reviewsDao.deleteAll()
+    }
+
+    fun getCount() : Flow<List<Int>> {
         return reviewsDao.getReviewsCount()
     }
 }

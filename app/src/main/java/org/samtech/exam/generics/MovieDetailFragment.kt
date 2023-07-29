@@ -17,6 +17,7 @@ import org.samtech.exam.R
 import org.samtech.exam.Singleton
 import org.samtech.exam.ui.adapters.ReviewsAdapter
 import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
+import org.samtech.exam.utils.NetworkUtils.isOnline
 import org.samtech.exam.utils.Utils
 import org.samtech.exam.utils.Utils.setGlideImage
 
@@ -47,11 +48,10 @@ class MovieDetailFragment : Fragment() {
 
         setupValues(inflater.context)
 
-        setupReviews(inflater.context)
         return root
     }
 
-    private fun setupReviews(context: Context?) {
+    private fun setupReviews(ctx : Context) {
         val adapter = ReviewsAdapter()
         rvReviews.adapter = adapter
         rvReviews.layoutManager =
@@ -81,10 +81,11 @@ class MovieDetailFragment : Fragment() {
         val voteCountArg = arguments?.getString("voteCount")
         val ratingArg = arguments?.getString("rating")
 
-        opMoviewDetailsViewModel.downloadReviewValues(idArg!!)
-
         backdropIView.setImageDrawable(
-            AppCompatResources.getDrawable(ctx, R.drawable.gradient_backdrop)
+            AppCompatResources.getDrawable(
+                ctx,
+                R.drawable.gradient_backdrop
+            )
         )
 
         setGlideImage(ctx, BASE_IMAGE_PATH + backdropPathArg, backdropIView)
@@ -105,6 +106,12 @@ class MovieDetailFragment : Fragment() {
 
         movieOverviewTView.text =
             Utils.getSpannedText(ctx.getString(R.string.description, overviewArg))
+
+        if (isOnline(ctx)) {
+            opMoviewDetailsViewModel.downloadReviewValues(idArg!!)
+        }
+
+        setupReviews(ctx)
 
     }
 }
