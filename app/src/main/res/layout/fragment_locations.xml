@@ -6,17 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.locations.LocationsFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <org.osmdroid.views.MapView
+        android:id="@+id/fr_location_map"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fr_location_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/gen_dimen_16"
+        android:contentDescription="@string/get_current_location"
+        android:elevation="6dp"
+        android:foregroundGravity="right|bottom"
+        android:src="@drawable/ic_location"
+        app:borderWidth="0dp"
+        app:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:pressedTranslationZ="12dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,13 @@ import com.android.volley.toolbox.Volley
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.samtech.exam.database.MoviesRoomDatabase
-import org.samtech.exam.firebase.repositories.FireStoreLocationsRepository
+import org.samtech.exam.firebase.repositories.FireStoreLocationsFSRepository
+import org.samtech.exam.repositories.LocationsRepository
 import org.samtech.exam.repositories.ResultsRepository
 import org.samtech.exam.repositories.ReviewsRepositor
 import org.samtech.exam.repositories.UsersRepository
+import org.samtech.exam.utils.MyLocationManager
+import java.util.concurrent.Executors
 
 class Singleton : Application() {
 
@@ -20,8 +23,7 @@ class Singleton : Application() {
     val usersRepository by lazy { UsersRepository(database.usersDao()) }
     val resultsRepository by lazy { ResultsRepository(database.resultsDao()) }
     val reviewsRepository by lazy { ReviewsRepositor(database.reviewsDao()) }
-    val fireStoreLocationsRepository by lazy { FireStoreLocationsRepository() }
-
+    val fireStoreLocationsRepository by lazy { FireStoreLocationsFSRepository() }
 
     override fun onCreate() {
         super.onCreate()

@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_location"
         android:title="@string/title_locations" />
 
+    <item
+        android:id="@+id/navigation_photos"
+        android:icon="@drawable/ic_photo"
+        android:title="@string/photos" />
+
 </menu>

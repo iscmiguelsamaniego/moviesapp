@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Exam</string>
+    <string name="app_name">Exámen</string>
     <string name="title_movies">Peliculas</string>
     <string name="title_user">Usuario</string>
     <string name="title_locations">Ubicaciones</string>
@@ -16,4 +16,15 @@
     <string name="no_registered">No registrado</string>
     <string name="no_internet">No se detecta conexión a internet</string>
     <string name="rated_by_me">Peliculas calificadas por mi</string>
+    <string name="no_provider">noprovider</string>
+    <string name="my_location">Mi ubicación</string>
+    <string name="no_locations">No hay ubicaciones para visualizar</string>
+    <string name="get_current_location">Boton obtener ubicación actual</string>
+    <string name="enable_gps">Por favor habilite su GPS</string>
+    <string name="wait_n_seconds">Espere 2 segundos para intentar de nuevo</string>
+    <string name="photos">Fotos</string>
+    <string name="detalle_pelicula">Detalle Pelicula</string>
+    <string name="load_image">Cargar imagen desde galeria</string>
+    <string name="Take_photo">Tomar foto</string>
+    <string name="taken_photo">Imagen tomada</string>
 </resources>

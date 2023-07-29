@@ -11,6 +11,7 @@ object Constants {
     const val BEST_RECOMMENDED_PATH = "/movie/now_playing?language=es"
     const val REVIEWS_PATH_A = "/movie/"
     const val REVIEWS_PATH_B = "/reviews"
+    const val INTERVAL_TIME_FOR_TAP: Long = 2000
 
     val AUTHORIZATION = "Authorization"
     val BEARER = "Bearer "

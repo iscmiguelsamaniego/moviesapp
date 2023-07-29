@@ -15,9 +15,9 @@ import org.samtech.exam.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var navController: NavController
     private lateinit var navView: BottomNavigationView
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +25,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView = findViewById(R.id.nav_view)
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_movies,
-            R.id.navigation_user,
-            R.id.navigation_locations))
 
-        setupNavigation()
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_movies,
+                R.id.navigation_user,
+                R.id.navigation_locations,
+                R.id.navigation_photos
+            )
+        )
+
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+        //setupNavigation()
     }
 
     private fun setupNavigation() {

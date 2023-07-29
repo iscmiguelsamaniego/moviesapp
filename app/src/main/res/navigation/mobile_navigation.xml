@@ -30,7 +30,13 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="org.samtech.exam.generics.MovieDetailFragment"
-        android:label="fragment_movie_detailtoborrar"
+        android:label="@string/detalle_pelicula"
         tools:layout="@layout/fragment_movie_detail" />
+
+    <fragment
+        android:id="@+id/navigation_photos"
+        android:name="org.samtech.exam.ui.photos.PhotosFragment"
+        android:label="@string/photos"
+        tools:layout="@layout/fragment_photos" />
 
 </navigation>

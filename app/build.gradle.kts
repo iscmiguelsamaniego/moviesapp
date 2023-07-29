@@ -66,7 +66,14 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
     implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation ("com.android.volley:volley:1.2.1")
-    implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    //OSMDroid
+    implementation("org.osmdroid:osmdroid-android:6.1.14")
+    implementation("androidx.preference:preference-ktx:1.2.0")
+
+    //LocationGoogle
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
