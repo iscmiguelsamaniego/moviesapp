@@ -13,14 +13,16 @@ Apis
   
 - Firebase
 
-  https://firebase.google.com
-  
-      - Firebase Cloud Messaging
-      - FireStore
+https://firebase.google.com
+
+      - FireStore Database
+      - Firebase Storage
 
 Librerias 
 
 - Open Street Maps
+- Glide
+- Volley
 
 Flujo de pantallas
 
@@ -36,7 +38,7 @@ Tareas Realizadas
 
 5.- Crear DB en Firebase Store
 
-6.- Configurar FCM
+6.- Configurar Firebase Storage
 
 7.- Asignar componentes graficos en drawable
 
