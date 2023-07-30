@@ -42,38 +42,57 @@ android {
 
 dependencies {
 
+    val roomVersion = "2.5.0"
+    val firebaseVersion = "32.2.0"
+    val locationVersion = "21.0.1"
+    val glideVersion = "4.15.1"
+    val volleyVersion = "1.2.1"
+    val gsonVersion = "2.10.1"
+    val osmVersion = "6.1.14"
+
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-
-    val room_version = "2.5.0"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-    annotationProcessor("androidx.room:room-ktx:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
-
     implementation("androidx.core:core-ktx:1.10.1")
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
+
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+    implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    annotationProcessor("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:$firebaseVersion"))
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    //LocationGoogle
+    implementation("com.google.android.gms:play-services-location:$locationVersion")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+
+    //Volley
+    implementation("com.android.volley:volley:$volleyVersion")
+
+    //Gson
+    implementation("com.google.code.gson:gson:$gsonVersion")
+
+    //OSMDroid
+    implementation("org.osmdroid:osmdroid-android:$osmVersion")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.android.volley:volley:1.2.1")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-
-    //OSMDroid
-    implementation("org.osmdroid:osmdroid-android:6.1.14")
-    implementation("androidx.preference:preference-ktx:1.2.0")
-
-    //LocationGoogle
-    implementation("com.google.android.gms:play-services-location:21.0.1")
 }

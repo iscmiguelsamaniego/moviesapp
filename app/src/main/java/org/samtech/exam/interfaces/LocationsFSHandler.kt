@@ -3,7 +3,7 @@ package org.samtech.exam.interfaces
 import org.samtech.exam.firebase.models.FSLocations
 import org.samtech.exam.network.pokos.UserPoko
 
-interface LocationsFSRepository {
+interface LocationsFSHandler {
 
     fun getLocationsValues(listener: LocationsListener) : String
     fun updateLocationsValues(userId : String, user: UserPoko) : String

@@ -2,11 +2,11 @@ package org.samtech.exam.firebase.repositories
 
 import com.google.firebase.firestore.FirebaseFirestore
 import org.samtech.exam.firebase.models.FSLocations
-import org.samtech.exam.interfaces.LocationsFSRepository
+import org.samtech.exam.interfaces.LocationsFSHandler
 import org.samtech.exam.network.pokos.UserPoko
 import org.samtech.exam.utils.Constants.COLLECTION_USER
 
-class FireStoreLocationsFSRepository : LocationsFSRepository {
+class FireStoreLocationsFSRepository : LocationsFSHandler {
 
     var db = FirebaseFirestore.getInstance()
 
@@ -39,7 +39,7 @@ class FireStoreLocationsFSRepository : LocationsFSRepository {
                     adultResponse))
                 userInfoTView.text = x
     * */
-    override fun getLocationsValues(listener: LocationsFSRepository.LocationsListener): String {
+    override fun getLocationsValues(listener: LocationsFSHandler.LocationsListener): String {
         var getResult = ""
 
         db.collection(COLLECTION_USER)

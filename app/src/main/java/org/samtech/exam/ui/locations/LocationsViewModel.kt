@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import org.samtech.exam.Singleton
 import org.samtech.exam.firebase.models.FSLocations
 import org.samtech.exam.firebase.repositories.FireStoreLocationsFSRepository
-import org.samtech.exam.interfaces.LocationsFSRepository
+import org.samtech.exam.interfaces.LocationsFSHandler
 import org.samtech.exam.network.volley.APIController
 import org.samtech.exam.network.volley.ServiceListenerVolley
 import org.samtech.exam.repositories.LocationsRepository
@@ -21,7 +21,7 @@ class LocationsViewModel(
     locationsFSRepo: FireStoreLocationsFSRepository
 ) : ViewModel() {
 
-    private val locationsFSRepository: LocationsFSRepository = locationsFSRepo
+    private val locationsFSHandler: LocationsFSHandler = locationsFSRepo
 
     private val locationRepository = LocationsRepository.getInstance(
         application.applicationContext,
@@ -38,7 +38,7 @@ class LocationsViewModel(
     fun getLocationsFSValues(): MutableLiveData<FSLocations> {
         val locationsMLD = MutableLiveData<FSLocations>()
 
-        locationsFSRepository.getLocationsValues(object : LocationsFSRepository.LocationsListener {
+        locationsFSHandler.getLocationsValues(object : LocationsFSHandler.LocationsListener {
             override fun onLocationsResult(locations: FSLocations) {
                 locationsMLD.postValue(locations)
             }
