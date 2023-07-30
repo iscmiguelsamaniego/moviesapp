@@ -6,11 +6,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "reviews")
 class Reviews(
-    @PrimaryKey @ColumnInfo(name = "id") val id: Int?,
-    @ColumnInfo("name") var name : String? = null,
-    @ColumnInfo("username") var username : String? = null,
-    @ColumnInfo("avatar_path") var avatar_path : String? = null,
-    @ColumnInfo("created_at") var created_at : String? = null,
-    @ColumnInfo("rating") var rating : String? = null,
-    @ColumnInfo("content") var content : String? = null,
-)
+    @ColumnInfo("movieid") var movieid : String?,
+    @ColumnInfo("name") var name : String?,
+    @ColumnInfo("username") var username : String?,
+    @ColumnInfo("avatar_path") var avatar_path : String?,
+    @ColumnInfo("created_at") var created_at : String?,
+    @ColumnInfo("rating") var rating : String?,
+    @ColumnInfo("content") var content : String?
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}

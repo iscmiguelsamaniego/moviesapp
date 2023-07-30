@@ -2,7 +2,7 @@ package org.samtech.exam.utils
 
 object Constants {
     const val BASE_PATH = "https://api.themoviedb.org/3"
-    const val BASE_IMAGE_PATH = "http://image.tmdb.org/t/p/w500" //replace by api
+    const val BASE_IMAGE_PATH = "http://image.tmdb.org/t/p/w500"
     const val PROFILE_PATH = "/account/20169309"
     const val RATED_PATH = "$PROFILE_PATH/rated/movies?language=es"
     const val CATEGORIES_PATH = "/genre/movie/list?language=es"
@@ -10,7 +10,7 @@ object Constants {
     const val BEST_RATED_PATH = "/movie/top_rated?language=es"
     const val BEST_RECOMMENDED_PATH = "/movie/now_playing?language=es"
     const val REVIEWS_PATH_A = "/movie/"
-    const val REVIEWS_PATH_B = "/reviews"
+    const val REVIEWS_PATH_B = "/reviews" //THE API IS FAILED WHE REQUEST REVIEWS VALUES ON SPANISH
     const val INTERVAL_TIME_FOR_TAP: Long = 2000
 
     const val POPULAR = "POPULARES"

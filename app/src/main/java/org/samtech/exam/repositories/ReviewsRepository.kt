@@ -1,15 +1,18 @@
 package org.samtech.exam.repositories
 
 import androidx.annotation.WorkerThread
-import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import org.samtech.exam.database.dao.ReviewsDao
 import org.samtech.exam.database.entities.Reviews
 
 class ReviewsRepositor(private val reviewsDao: ReviewsDao) {
 
-    fun getReviews(): Flow<List<Reviews>> {
+    fun getAllReviews(): Flow<List<Reviews>> {
         return reviewsDao.getReviews()
+    }
+
+    fun getReviewBy(movieid : String): Flow<List<Reviews>> {
+        return reviewsDao.getReviewBy(movieid)
     }
 
     @WorkerThread

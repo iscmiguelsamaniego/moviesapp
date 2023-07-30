@@ -52,7 +52,7 @@ class UsersFragment : Fragment() {
 
         if (isOnline(context)) {
             opUsersViewModel.downloadValuesBy(inflater.context, PROFILE_PATH, getString(R.string.no_value))
-            opUsersViewModel.downloadValuesBy(inflater.context, RATED_PATH,RATED_BY_ME)
+            opUsersViewModel.downloadValuesBy(inflater.context, RATED_PATH, RATED_BY_ME)
         } else {
             customToast(requireContext(), getString(R.string.no_internet))
         }

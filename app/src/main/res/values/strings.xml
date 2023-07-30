@@ -4,7 +4,7 @@
     <string name="title_user">Usuario</string>
     <string name="title_locations">Ubicaciones</string>
     <string name="date_releasing"><![CDATA[<b> %1$s </b>]]></string>
-    <string name="details_movie"><![CDATA[ <b>%s</b><br/><br/><b>%s</b><br/>Calificación :<b>%s</b><br/>Votos :<b>%s</b><br/>Idioma :<b>%s</b>]]></string>
+    <string name="details_movie"><![CDATA[ <b>%s</b><br/><br/><b>%s</b><br/>Calificación : <b>%s</b><br/>Votos : <b>%s</b><br/>Idioma : <b>%s</b>]]></string>
     <string name="description"><![CDATA[ <b>Descripción : </b> <br/><br/>%s </b>]]></string>
     <string name="user_values">Bienvenido<![CDATA[<br/><br/><b>%s</b><br/>Id : <b> %s </b><br/>País : <b> %s </b><br/>Idioma : <b> %s </b><br/>Nombre : <b> %s </b><br/>Contenido para adultos : <b> %s</b>]]></string>
     <string name="user_image">Imágen del usuario</string>
@@ -42,4 +42,5 @@
     <string name="video">video</string>
     <string name="votes">voteAverage</string>
     <string name="vote_count">voteCount</string>
+    <string name="tvalue_bar">Descripción</string>
 </resources>

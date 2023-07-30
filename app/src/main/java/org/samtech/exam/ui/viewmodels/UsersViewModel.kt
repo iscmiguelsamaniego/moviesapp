@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import org.samtech.exam.database.entities.Movies
+import org.samtech.exam.database.entities.Reviews
 import org.samtech.exam.database.entities.Users
 import org.samtech.exam.network.pokos.MoviesPoko
 import org.samtech.exam.network.pokos.UserPoko

@@ -21,6 +21,7 @@ import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
 import org.samtech.exam.utils.NetworkUtils.isOnline
 import org.samtech.exam.utils.Utils
 import org.samtech.exam.utils.Utils.setGlideImage
+import java.text.DecimalFormat
 
 class MovieDetailFragment : Fragment() {
 
@@ -47,39 +48,27 @@ class MovieDetailFragment : Fragment() {
         movieOverviewTView = root.findViewById(R.id.fr_movie_detail_overview)
         rvReviews = root.findViewById(R.id.fr_user_reviews_recyclerview)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Descripción"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.tvalue_bar)
         setupValues(inflater.context)
         return root
     }
 
-    private fun setupReviews() {
-        val adapter = ReviewsAdapter()
-        rvReviews.adapter = adapter
-        rvReviews.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        opMoviewDetailsViewModel.allReviews.observe(viewLifecycleOwner) { reviews ->
-            reviews?.let {
-                adapter.submitList(it)
-            }
-        }
-    }
-
     fun setupValues(ctx: Context) {
 
-        val idArg = arguments?.getString("id")
-        val adultArg = arguments?.getString("adult").toString()
-        val backdropPathArg = arguments?.getString("backdropPath").toString()
-        val languajeArg = arguments?.getString("originalLanguage").toString()
-        val titleOriginalArg = arguments?.getString("originalTitle").toString()
-        val overviewArg = arguments?.getString("overview").toString()
-        val popularityArg = arguments?.getString("popularity").toString()
-        val posterPathArg = arguments?.getString("posterPath").toString()
-        val releaseArg = arguments?.getString("releaseDate").toString()
-        val titleArg = arguments?.getString("title").toString()
-        val videoArg = arguments?.getString("video").toString()
-        val voteArg = arguments?.getString("voteAverage").toString()
-        val voteCountArg = arguments?.getString("voteCount")
+        val idArg = arguments?.getString(getString(R.string.key_id) )
+        val adultArg = arguments?.getString(getString(R.string.key_adult)).toString()
+        val backdropPathArg = arguments?.getString(getString(R.string.backdrop_path)).toString()
+        val languajeArg = arguments?.getString(getString(R.string.orig_languaje)).toString()
+        val overviewArg = arguments?.getString(getString(R.string.overview)).toString()
+        val popularityArg = arguments?.getString(getString(R.string.popularity)).toString()
+        val posterPathArg = arguments?.getString(getString(R.string.posterpath)).toString()
+        val releaseArg = arguments?.getString(getString(R.string.releasedate)).toString()
+        val titleArg = arguments?.getString(getString(R.string.title)).toString()
+        val videoArg = arguments?.getString(getString(R.string.video)).toString()
+        val voteArg = arguments?.getString(getString(R.string.votes)).toString()
+        val voteCountArg = arguments?.getString(getString(R.string.vote_count))
+        val df = DecimalFormat(ctx.getString(R.string.decimal_two_pos))
+        val roundedNum = df.format(voteArg.toDouble())
 
         backdropIView.setImageDrawable(
             AppCompatResources.getDrawable(
@@ -96,10 +85,10 @@ class MovieDetailFragment : Fragment() {
             Utils.getSpannedText(
                 ctx.getString(
                     R.string.details_movie,
-                    titleOriginalArg,
+                    titleArg,
                     releaseArg,
-                    voteArg,
-                    voteArg,
+                    roundedNum,
+                    voteCountArg,
                     languajeArg
                 )
             )
@@ -115,10 +104,23 @@ class MovieDetailFragment : Fragment() {
                 }
             }
 
-            opMoviewDetailsViewModel.downloadReviewValues(idArg!!)
+            opMoviewDetailsViewModel.downloadReviewValues(ctx, idArg!!)
         }
 
-        setupReviews()
+        setupReviews(idArg)
 
+    }
+
+    private fun setupReviews(paramId: String?) {
+        val adapter = ReviewsAdapter()
+        rvReviews.adapter = adapter
+        rvReviews.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        opMoviewDetailsViewModel.getReviewsBy(paramId!!).observe(viewLifecycleOwner) { reviews ->
+            reviews?.let {
+                adapter.submitList(it)
+            }
+        }
     }
 }

@@ -52,13 +52,15 @@
 
         <TextView
             android:id="@+id/fr_movie_in_details"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:shadowColor="@color/text_shadow"
             android:shadowDx="1"
+            android:background="@drawable/gradient_backdrop"
+            android:padding="@dimen/gen_dimen_36"
             android:shadowDy="1"
             android:shadowRadius="2"
-            android:text="Volver al futuro"
+            tools:text="Volver al futuro"
             android:textColor="@color/light_font"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/fr_movie_detail_cv_overview"

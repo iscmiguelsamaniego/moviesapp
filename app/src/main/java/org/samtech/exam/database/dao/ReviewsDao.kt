@@ -17,6 +17,9 @@ interface ReviewsDao {
     @Query("SELECT * FROM reviews ORDER BY id DESC")
     fun getReviews(): Flow<List<Reviews>>
 
+    @Query("SELECT * FROM reviews where movieid = :movieid")
+    fun getReviewBy(movieid: String?): Flow<List<Reviews>>
+
     @Query("DELETE FROM reviews")
     fun deleteAll()
 
