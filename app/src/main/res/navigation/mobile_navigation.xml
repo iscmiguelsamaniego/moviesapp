@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_user">
+    app:startDestination="@+id/navigation_movies">
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="org.samtech.exam.ui.user.UserFragment"
+        android:name="org.samtech.exam.ui.fragments.UsersFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" >
         <action
@@ -17,25 +17,29 @@
 
     <fragment
         android:id="@+id/navigation_movies"
-        android:name="org.samtech.exam.ui.movies.MoviesFragment"
+        android:name="org.samtech.exam.ui.fragments.MoviesFragment"
         android:label="@string/title_movies"
-        tools:layout="@layout/fragment_movies" />
+        tools:layout="@layout/fragment_movies" >
+        <action
+            android:id="@+id/action_open_movie_detail_from_movies"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_locations"
-        android:name="org.samtech.exam.ui.locations.LocationsFragment"
+        android:name="org.samtech.exam.ui.fragments.LocationsFragment"
         android:label="@string/title_locations"
         tools:layout="@layout/fragment_locations" />
 
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="org.samtech.exam.generics.MovieDetailFragment"
+        android:name="org.samtech.exam.ui.fragments.MovieDetailFragment"
         android:label="@string/detalle_pelicula"
         tools:layout="@layout/fragment_movie_detail" />
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="org.samtech.exam.ui.photos.PhotosFragment"
+        android:name="org.samtech.exam.ui.fragments.PhotosFragment"
         android:label="@string/photos"
         tools:layout="@layout/fragment_photos" />
 

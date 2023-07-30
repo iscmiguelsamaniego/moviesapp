@@ -1,11 +1,10 @@
-package org.samtech.exam.ui.locations
+package org.samtech.exam.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import org.samtech.exam.Singleton
 import org.samtech.exam.firebase.models.FSLocations
 import org.samtech.exam.firebase.repositories.FireStoreLocationsFSRepository
 import org.samtech.exam.interfaces.LocationsFSHandler
@@ -13,7 +12,6 @@ import org.samtech.exam.network.volley.APIController
 import org.samtech.exam.network.volley.ServiceListenerVolley
 import org.samtech.exam.repositories.LocationsRepository
 import org.samtech.exam.utils.Constants
-import org.samtech.exam.utils.NetworkUtils
 import java.util.concurrent.Executors
 
 class LocationsViewModel(
@@ -47,26 +45,24 @@ class LocationsViewModel(
         return locationsMLD
     }
 
+    fun getApiController(): APIController {
+        val service = ServiceListenerVolley()
+        return APIController(service)
+    }
+
     //this is agood sample
     fun downloadAndStoreOrUpdateLocation(documentId: String) {
-        val ctx = Singleton.instance?.applicationContext
-        if (ctx != null) {
-            if (NetworkUtils.isOnline(ctx)) {
-                val service = ServiceListenerVolley()
-                val apiController = APIController(service)
 
-                apiController.getString(Constants.PROFILE_PATH, Constants.TOKEN) { response ->
-                    if (!response.isNullOrBlank()) {
-                        //TODO Store locations with model
+        getApiController().getString(Constants.PROFILE_PATH, Constants.TOKEN) { response ->
+            if (!response.isNullOrBlank()) {
+                //TODO Store locations with model
 
-                        /*val userPokoResponse = Gson().fromJson(response, UserPoko::class.java)
-                        if (documentId.isBlank()) {
-                            locationsRepository.storeLocationsValues(userPokoResponse)
-                        } else {
-                            locationsRepository.updateLocationsValues(documentId, userPokoResponse)
-                        }*/
-                    }
-                }
+                /*val userPokoResponse = Gson().fromJson(response, UserPoko::class.java)
+                if (documentId.isBlank()) {
+                    locationsRepository.storeLocationsValues(userPokoResponse)
+                } else {
+                    locationsRepository.updateLocationsValues(documentId, userPokoResponse)
+                }*/
             }
         }
     }
@@ -85,3 +81,5 @@ class LocationsViewModel(
         }
     }
 }
+
+

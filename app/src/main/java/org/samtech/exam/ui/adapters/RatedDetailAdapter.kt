@@ -4,21 +4,15 @@ package org.samtech.exam.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.samtech.exam.R
-import org.samtech.exam.database.entities.Results
-import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
-import org.samtech.exam.utils.Utils.mayTapButton
-import org.samtech.exam.utils.Utils.setGlideImage
+import org.samtech.exam.database.entities.Movies
 
 
 class RatedDetailAdapter() :
-    ListAdapter<Results, RatedDetailAdapter.UserViewHolder>(UserComparator()) {
+    ListAdapter<Movies, RatedDetailAdapter.UserViewHolder>(UserComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder.create(parent)
@@ -45,7 +39,7 @@ class RatedDetailAdapter() :
         private val reviewTView: TextView = itemView.findViewById(R.id.user_item_review)
         private val viewAllBtn: Button = itemView.findViewById(R.id.user_item_view_all_reviews)*/
 
-        fun bind(results: Results) {
+        fun bind(movies: Movies) {
             /*setGlideImage(itemView.context,
                 BASE_IMAGE_PATH+results.backdropPath,
                 backdropImageView)
@@ -77,12 +71,12 @@ class RatedDetailAdapter() :
         }
     }
 
-    class UserComparator : DiffUtil.ItemCallback<Results>() {
-        override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {
+    class UserComparator : DiffUtil.ItemCallback<Movies>() {
+        override fun areItemsTheSame(oldItem: Movies, newItem: Movies): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean {
+        override fun areContentsTheSame(oldItem: Movies, newItem: Movies): Boolean {
             return oldItem.id == newItem.id
         }
     }

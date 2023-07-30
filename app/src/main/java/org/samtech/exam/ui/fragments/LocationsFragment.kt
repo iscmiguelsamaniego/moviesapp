@@ -1,7 +1,6 @@
-package org.samtech.exam.ui.locations
+package org.samtech.exam.ui.fragments
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.ColorMatrix
@@ -28,6 +27,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.samtech.exam.R
 import org.samtech.exam.Singleton
+import org.samtech.exam.ui.viewmodels.LocationsViewModel
 import org.samtech.exam.utils.Constants.INTERVAL_TIME_FOR_TAP
 import org.samtech.exam.utils.Utils.customToast
 import org.samtech.exam.utils.Utils.mayTapButton

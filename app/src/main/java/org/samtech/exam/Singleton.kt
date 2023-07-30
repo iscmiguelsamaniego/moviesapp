@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.samtech.exam.database.MoviesRoomDatabase
 import org.samtech.exam.firebase.repositories.FireStoreLocationsFSRepository
-import org.samtech.exam.repositories.ResultsRepository
+import org.samtech.exam.repositories.MoviesRepository
 import org.samtech.exam.repositories.ReviewsRepositor
 import org.samtech.exam.repositories.UsersRepository
 
@@ -18,7 +18,7 @@ class Singleton : Application() {
     val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { MoviesRoomDatabase.getDataBase(this, applicationScope) }
     val usersRepository by lazy { UsersRepository(database.usersDao()) }
-    val resultsRepository by lazy { ResultsRepository(database.resultsDao()) }
+    val moviesRepository by lazy { MoviesRepository(database.resultsDao()) }
     val reviewsRepository by lazy { ReviewsRepositor(database.reviewsDao()) }
     val fireStoreLocationsRepository by lazy { FireStoreLocationsFSRepository() }
 

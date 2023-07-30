@@ -13,6 +13,11 @@ object Constants {
     const val REVIEWS_PATH_B = "/reviews"
     const val INTERVAL_TIME_FOR_TAP: Long = 2000
 
+    const val POPULAR = "POPULARES"
+    const val RATED_BY_ME = "MEJOR CALIFICADAS POR MI"
+    const val RATED = "MEJOR CALIFICADAS"
+    const val RECOMMENDED = "RECOMENDADAS"
+
     val AUTHORIZATION = "Authorization"
     val BEARER = "Bearer "
     val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjI3ODUxMzgzOTBiMTc4MTUzNmQ4NzQ1ZmJkMjEzNSIsInN1YiI6IjY0YjcxOTg2YTU3NDNkMDBhY2I1ZTY1ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.X4uDfBK4W9rwbGKS5oxS6k3YGOCuZVJy9g8Wthzxne8"

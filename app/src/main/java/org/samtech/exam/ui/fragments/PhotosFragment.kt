@@ -1,4 +1,4 @@
-package org.samtech.exam.ui.photos
+package org.samtech.exam.ui.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Context

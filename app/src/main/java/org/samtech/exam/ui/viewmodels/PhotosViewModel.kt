@@ -1,4 +1,4 @@
-package org.samtech.exam.ui.photos
+package org.samtech.exam.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package org.samtech.exam.generics
+package org.samtech.exam.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.samtech.exam.MovieDetailViewModel
+import org.samtech.exam.ui.viewmodels.MovieDetailViewModel
 import org.samtech.exam.R
 import org.samtech.exam.Singleton
 import org.samtech.exam.ui.adapters.ReviewsAdapter
@@ -80,7 +80,6 @@ class MovieDetailFragment : Fragment() {
         val videoArg = arguments?.getString("video").toString()
         val voteArg = arguments?.getString("voteAverage").toString()
         val voteCountArg = arguments?.getString("voteCount")
-        val ratingArg = arguments?.getString("rating")
 
         backdropIView.setImageDrawable(
             AppCompatResources.getDrawable(
@@ -99,7 +98,7 @@ class MovieDetailFragment : Fragment() {
                     R.string.details_movie,
                     titleOriginalArg,
                     releaseArg,
-                    ratingArg,
+                    voteArg,
                     voteArg,
                     languajeArg
                 )

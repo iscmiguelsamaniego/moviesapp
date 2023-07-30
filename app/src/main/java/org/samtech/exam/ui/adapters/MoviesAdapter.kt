@@ -14,16 +14,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.samtech.exam.R
-import org.samtech.exam.database.entities.Results
+import org.samtech.exam.database.entities.Movies
 import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
 import org.samtech.exam.utils.Utils
-import org.samtech.exam.utils.Utils.customToast
-import org.samtech.exam.utils.Utils.mayTapButton
 import org.samtech.exam.utils.Utils.setGlideImage
+import java.text.DecimalFormat
 
 
-class RatedAdapter() : ListAdapter<Results, RatedAdapter.UserViewHolder>(UserComparator()) {
-    var onDetailClick: ((Results) -> Unit)? = null
+class MoviesAdapter : ListAdapter<Movies, MoviesAdapter.UserViewHolder>(UserComparator()) {
+    var onDetailClick: ((Movies) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder.create(parent)
@@ -45,40 +44,47 @@ class RatedAdapter() : ListAdapter<Results, RatedAdapter.UserViewHolder>(UserCom
         private val titleMovieTView: TextView = itemView.findViewById(R.id.user_item_title)
         private val releaseDateTView: TextView = itemView.findViewById(R.id.user_item_release_date)
 
-        fun bind(results: Results) {
+        fun bind(movies: Movies) {
             setGlideImage(
                 itemView.context,
-                BASE_IMAGE_PATH + results.posterPath,
+                BASE_IMAGE_PATH + movies.posterPath,
                 posterImageView
             )
 
-            ratedTView.text = results.rating.toString()
-            titleMovieTView.text = results.title
+            ratedTView.text = movies.voteAverage.toString()
+            titleMovieTView.text = movies.title
             releaseDateTView.text =
                 Utils.getSpannedText(
                     itemView.context.getString(
                         R.string.date_releasing,
-                        results.releaseDate
+                        movies.releaseDate
                     )
                 )
 
-            ratedTView.text = results.rating.toString()
+            val df = DecimalFormat(itemView.context.getString(R.string.decimal_two_pos))
+            val roundedNum = df.format(movies.voteAverage)
+            ratedTView.text = roundedNum
 
-            val rating = results.rating!!
+            if (movies.voteAverage != null) {
+                val voteAverage = movies.voteAverage!!
 
-            val resource =
-                if (rating >= 7)
-                R.drawable.custom_progress_green else R.drawable.custom_progress_orange
+                val resource =
+                    if (voteAverage >= 7)
+                        R.drawable.custom_progress_green else R.drawable.custom_progress_orange
 
-            setProgressDrawable(itemView.context,
-                resource,
-                ratedProgress)
-            ratedProgress.progress = rating.times(10)
+                setProgressDrawable(
+                    itemView.context,
+                    resource,
+                    ratedProgress
+                )
+
+                ratedProgress.progress = voteAverage.toInt()
+            }
 
         }
 
 
-        fun setProgressDrawable(context : Context, paramSrc : Int, progress : ProgressBar){
+        fun setProgressDrawable(context: Context, paramSrc: Int, progress: ProgressBar) {
             progress.progressDrawable = ContextCompat.getDrawable(context, paramSrc)
         }
 
@@ -91,12 +97,12 @@ class RatedAdapter() : ListAdapter<Results, RatedAdapter.UserViewHolder>(UserCom
         }
     }
 
-    class UserComparator : DiffUtil.ItemCallback<Results>() {
-        override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {
+    class UserComparator : DiffUtil.ItemCallback<Movies>() {
+        override fun areItemsTheSame(oldItem: Movies, newItem: Movies): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean {
+        override fun areContentsTheSame(oldItem: Movies, newItem: Movies): Boolean {
             return oldItem.id == newItem.id
         }
     }

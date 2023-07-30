@@ -1,4 +1,4 @@
-package org.samtech.exam.ui.user
+package org.samtech.exam.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -15,20 +15,24 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.samtech.exam.R
 import org.samtech.exam.Singleton
-import org.samtech.exam.ui.adapters.RatedAdapter
+import org.samtech.exam.ui.adapters.MoviesAdapter
+import org.samtech.exam.ui.viewmodels.UsersViewModel
 import org.samtech.exam.utils.Constants.BASE_IMAGE_PATH
+import org.samtech.exam.utils.Constants.PROFILE_PATH
+import org.samtech.exam.utils.Constants.RATED_BY_ME
+import org.samtech.exam.utils.Constants.RATED_PATH
 import org.samtech.exam.utils.NetworkUtils.isOnline
 import org.samtech.exam.utils.Utils.customToast
 import org.samtech.exam.utils.Utils.getSpannedText
 import org.samtech.exam.utils.Utils.setGlideImage
 
 
-class UserFragment : Fragment() {
+class UsersFragment : Fragment() {
 
-    private val opUserViewModel: UserViewModel by activityViewModels {
-        UserViewModel.UserViewModelFactory(
+    private val opUsersViewModel: UsersViewModel by activityViewModels {
+        UsersViewModel.UserViewModelFactory(
             Singleton.instance!!.usersRepository,
-            Singleton.instance!!.resultsRepository
+            Singleton.instance!!.moviesRepository
         )
     }
 
@@ -46,10 +50,10 @@ class UserFragment : Fragment() {
         userIView = root.findViewById(R.id.fr_user_image)
         userInfoTView = root.findViewById(R.id.fr_user_info_tview)
 
-        if(isOnline(context)) {
-            opUserViewModel.downloadUserValues()
-            opUserViewModel.downloadRatedValues()
-        }else{
+        if (isOnline(context)) {
+            opUsersViewModel.downloadValuesBy(inflater.context, PROFILE_PATH, getString(R.string.no_value))
+            opUsersViewModel.downloadValuesBy(inflater.context, RATED_PATH,RATED_BY_ME)
+        } else {
             customToast(requireContext(), getString(R.string.no_internet))
         }
 
@@ -58,20 +62,20 @@ class UserFragment : Fragment() {
         return root
     }
 
-    private fun setUpUserDetails(ctx : Context) {
-        opUserViewModel.allUsers.observe(viewLifecycleOwner){users ->
-            users.let{
+    private fun setUpUserDetails(ctx: Context) {
+        opUsersViewModel.allUsers.observe(viewLifecycleOwner) { users ->
+            users.let {
 
                 var urlAvatar = ""
-                var adultValue : Boolean? = false
+                var adultValue: Boolean? = false
                 var nameValue = ""
                 var userNameValue = ""
                 var idValue = ""
                 var iso31661Value = ""
                 var iso6391Value = ""
 
-                for (user in it){ //TODO FIX
-                    urlAvatar = BASE_IMAGE_PATH+ user.avatarPath
+                for (user in it) { //TODO FIX
+                    urlAvatar = BASE_IMAGE_PATH + user.avatarPath
                     adultValue = user.includeAdult
                     nameValue = user.name.toString()
                     userNameValue = user.username.toString()
@@ -88,16 +92,20 @@ class UserFragment : Fragment() {
                         getString(R.string.yes) else getString(R.string.no)
 
                 val nameRespose =
-                    if(nameValue.isNullOrBlank())
+                    if (nameValue.isNullOrBlank())
                         getString(R.string.no_registered) else nameValue
 
-                val profileUser = getSpannedText(getString(R.string.user_values,
-                    userNameValue,
-                    idValue,
-                    iso31661Value,
-                    iso6391Value,
-                    nameRespose,
-                    adultResponse))
+                val profileUser = getSpannedText(
+                    getString(
+                        R.string.user_values,
+                        userNameValue,
+                        idValue,
+                        iso31661Value,
+                        iso6391Value,
+                        nameRespose,
+                        adultResponse
+                    )
+                )
                 userInfoTView.text = profileUser
             }
         }
@@ -105,32 +113,32 @@ class UserFragment : Fragment() {
     }
 
     private fun populateRatedList() {
-        val adapter = RatedAdapter()
+        val adapter = MoviesAdapter()
         rvBestRated.adapter = adapter
         rvBestRated.layoutManager = GridLayoutManager(context, 2)
 
-        opUserViewModel.allResults.observe(viewLifecycleOwner) { results ->
-            results?.let {
+        opUsersViewModel.allRatedByMeMovies.observe(viewLifecycleOwner) { movies ->
+            movies?.let {
                 adapter.submitList(it)
             }
         }
 
-        adapter.onDetailClick = {results ->
+        adapter.onDetailClick = { movies ->
             val bundle = bundleOf(
-                "id" to results.id.toString(),
-                "adult" to results.adult,
-                "backdropPath" to results.backdropPath,
-                "originalLanguage" to results.originalLanguage,
-                "originalTitle" to results.originalTitle,
-                "overview" to results.overview,
-                "popularity" to results.popularity,
-                "posterPath" to results.posterPath,
-                "releaseDate" to results.releaseDate,
-                "title" to results.title,
-                "video" to results.video,
-                "voteAverage" to results.voteAverage.toString(),
-                "voteCount" to results.voteCount.toString(),
-                "rating" to results.rating.toString())
+                getString(R.string.key_id) to movies.id.toString(),
+                getString(R.string.key_adult) to movies.adult,
+                getString(R.string.backdrop_path) to movies.backdropPath,
+                getString(R.string.orig_languaje) to movies.originalLanguage,
+                getString(R.string.orig_title) to movies.originalTitle,
+                getString(R.string.overview) to movies.overview,
+                getString(R.string.popularity) to movies.popularity,
+                getString(R.string.posterpath) to movies.posterPath,
+                getString(R.string.releasedate) to movies.releaseDate,
+                getString(R.string.title) to movies.title,
+                getString(R.string.video) to movies.video,
+                getString(R.string.votes) to movies.voteAverage.toString(),
+                getString(R.string.vote_count) to movies.voteCount.toString()
+            )
             view?.findNavController()?.navigate(R.id.action_open_movie_detail, bundle)
 
         }

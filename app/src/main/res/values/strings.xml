@@ -27,4 +27,19 @@
     <string name="load_image">Cargar imagen desde galeria</string>
     <string name="Take_photo">Tomar foto</string>
     <string name="taken_photo">Imagen tomada</string>
+    <string name="no_value" />
+    <string name="decimal_two_pos">#.#</string>
+    <string name="key_id">id</string>
+    <string name="key_adult">adult</string>
+    <string name="backdrop_path">backdropPath</string>
+    <string name="orig_languaje">originalLanguage</string>
+    <string name="orig_title">originalTitle</string>
+    <string name="overview">overview</string>
+    <string name="popularity">popularity</string>
+    <string name="posterpath">posterPath</string>
+    <string name="releasedate">releaseDate</string>
+    <string name="title">title</string>
+    <string name="video">video</string>
+    <string name="votes">voteAverage</string>
+    <string name="vote_count">voteCount</string>
 </resources>

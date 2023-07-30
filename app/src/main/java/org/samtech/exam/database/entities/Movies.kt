@@ -4,9 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "results")
-class Results(
+@Entity(tableName = "movies")
+class Movies(
     @PrimaryKey @ColumnInfo(name = "id") val id: Int?,
+    @ColumnInfo("type") var type: String?,
     @ColumnInfo("adult") var adult: Boolean?,
     @ColumnInfo("backdropPath") var backdropPath: String?,
     @ColumnInfo("genreIds") var genreIds: String,
@@ -19,6 +20,5 @@ class Results(
     @ColumnInfo("title") var title: String?,
     @ColumnInfo("video") var video: Boolean?,
     @ColumnInfo("voteAverage") var voteAverage: Double?,
-    @ColumnInfo("voteCount") var voteCount: Int?,
-    @ColumnInfo("rating") var rating: Int? = null
+    @ColumnInfo("voteCount") var voteCount: Int?
 )

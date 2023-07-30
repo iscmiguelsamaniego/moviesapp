@@ -1,6 +1,5 @@
-package org.samtech.exam
+package org.samtech.exam.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -28,33 +27,32 @@ class MovieDetailViewModel(private val reviewsRepo: ReviewsRepositor) : ViewMode
         reviewsRepo.insert(reviews)
     }
 
+    fun getApiController(): APIController {
+        val service = ServiceListenerVolley()
+        return APIController(service)
+    }
 
     fun downloadReviewValues(idMovieParam: String) {
-        val ctx = Singleton.instance?.applicationContext
-        if (ctx != null) {
-            val service = ServiceListenerVolley()
-            val apiController = APIController(service)
-
-            val pathReviews = Constants.REVIEWS_PATH_A + idMovieParam + Constants.REVIEWS_PATH_B
-            apiController.getString(pathReviews, Constants.TOKEN) { response ->
-                if (!response.isNullOrBlank()) {
-                    val reviewsResponse = Gson().fromJson(response, ReviewsPoko::class.java)
-                    for (results in reviewsResponse.results) {
-                        insertReviews(
-                            Reviews(
-                                reviewsResponse.id,
-                                results.authorDetails?.name,
-                                results.authorDetails?.username,
-                                results.authorDetails?.avatarPath,
-                                results.authorDetails?.rating.toString(),
-                                results.createdAt,
-                                results.content
-                            )
+        val pathReviews = Constants.REVIEWS_PATH_A + idMovieParam + Constants.REVIEWS_PATH_B
+        getApiController().getString(pathReviews, Constants.TOKEN) { response ->
+            if (!response.isNullOrBlank()) {
+                val reviewsResponse = Gson().fromJson(response, ReviewsPoko::class.java)
+                for (results in reviewsResponse.results) {
+                    insertReviews(
+                        Reviews(
+                            reviewsResponse.id,
+                            results.authorDetails?.name,
+                            results.authorDetails?.username,
+                            results.authorDetails?.avatarPath,
+                            results.authorDetails?.rating.toString(),
+                            results.createdAt,
+                            results.content
                         )
-                    }
+                    )
                 }
             }
         }
+
     }
 
 

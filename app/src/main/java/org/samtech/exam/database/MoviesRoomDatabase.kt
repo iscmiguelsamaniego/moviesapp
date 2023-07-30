@@ -10,23 +10,23 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.samtech.exam.database.converters.LocationTypeConverters
 import org.samtech.exam.database.dao.UserLocationsDao
-import org.samtech.exam.database.dao.ResultsDao
+import org.samtech.exam.database.dao.MoviesDao
 import org.samtech.exam.database.dao.ReviewsDao
 import org.samtech.exam.database.dao.UsersDao
 import org.samtech.exam.database.entities.UserLocation
-import org.samtech.exam.database.entities.Results
+import org.samtech.exam.database.entities.Movies
 import org.samtech.exam.database.entities.Reviews
 import org.samtech.exam.database.entities.Users
 
 @Database(
-    entities = [Users::class, Results::class, Reviews::class, UserLocation::class],
+    entities = [Users::class, Movies::class, Reviews::class, UserLocation::class],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(LocationTypeConverters::class)
 abstract class MoviesRoomDatabase : RoomDatabase() {
 
-    abstract fun resultsDao(): ResultsDao
+    abstract fun resultsDao(): MoviesDao
     abstract fun usersDao(): UsersDao
     abstract fun reviewsDao(): ReviewsDao
     abstract fun locationsDao(): UserLocationsDao
