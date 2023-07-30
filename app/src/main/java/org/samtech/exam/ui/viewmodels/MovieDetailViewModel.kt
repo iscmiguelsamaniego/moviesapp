@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import org.samtech.exam.R
 import org.samtech.exam.database.entities.Reviews
 import org.samtech.exam.network.pokos.ReviewsPoko
 import org.samtech.exam.network.volley.APIController
@@ -42,17 +43,21 @@ class MovieDetailViewModel(private val reviewsRepo: ReviewsRepositor) : ViewMode
             if (!response.isNullOrBlank()) {
                 val reviewsResponse = Gson().fromJson(response, ReviewsPoko::class.java)
                 for (results in reviewsResponse.results) {
-                    insertReviews(
-                        Reviews(
-                            idMovieParam,
-                            Utils.customValidate(ctx, results.authorDetails?.name!!),
-                            Utils.customValidate(ctx, results.authorDetails?.username!!),
-                            Utils.customValidate(ctx, results.authorDetails?.avatarPath!!),
-                            Utils.customValidate(ctx, results.createdAt!!),
-                            results.authorDetails?.rating.toString(),
-                            results.content
+                    if(results.authorDetails != null) {
+                        insertReviews(
+                            Reviews(
+                                idMovieParam,
+                                Utils.customValidate(ctx, results.authorDetails?.name!!),
+                                Utils.customValidate(ctx, results.authorDetails?.username!!),
+                                if (results.authorDetails?.avatarPath != null )
+                                    results.authorDetails?.avatarPath else ctx.getString(
+                                    R.string.no_value),
+                                Utils.customValidate(ctx, results.createdAt!!),
+                                results.authorDetails?.rating.toString(),
+                                results.content
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
