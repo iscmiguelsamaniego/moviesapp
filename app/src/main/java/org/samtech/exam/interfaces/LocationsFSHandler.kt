@@ -1,15 +1,13 @@
 package org.samtech.exam.interfaces
 
-import org.samtech.exam.firebase.models.FSLocations
-import org.samtech.exam.network.pokos.UserPoko
+import org.samtech.exam.firebase.models.FSLocation
 
 interface LocationsFSHandler {
-
-    fun getLocationsValues(listener: LocationsListener) : String
-    fun updateLocationsValues(userId : String, user: UserPoko) : String
-    fun storeLocationsValues(user: UserPoko): String
+    fun getLocation(listener: LocationsListener): String
+    fun updateLocation(locationId: String, location: FSLocation): String
+    fun storeLocation(location: FSLocation): String
 
     interface LocationsListener {
-        fun onLocationsResult(locations: FSLocations)
+        fun onLocationsResult(locations: ArrayList<FSLocation>)
     }
 }

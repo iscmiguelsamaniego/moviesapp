@@ -16,5 +16,4 @@ class LocationTypeConverters {
             Date(it)
         }
     }
-
 }

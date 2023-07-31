@@ -12,6 +12,7 @@
     <color name="blue_ligth">#EBF8FE</color>
     <color name="light_font">#FBFBFB</color>
     <color name="text_shadow">#7F000000</color>
+    <color name="transparent">#80000000</color>
 
     <color name="green_start">#4cbb17</color>
     <color name="green_middle">#6FE637</color>

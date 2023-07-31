@@ -49,6 +49,7 @@ dependencies {
     val volleyVersion = "1.2.1"
     val gsonVersion = "2.10.1"
     val osmVersion = "6.1.14"
+    val jodaTimeVersion = "2.10.9.1"
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.core:core-ktx:1.10.1")

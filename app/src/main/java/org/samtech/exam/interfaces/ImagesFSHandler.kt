@@ -1,6 +1,5 @@
 package org.samtech.exam.interfaces
 
-import org.samtech.exam.firebase.models.FSLocations
 import org.samtech.exam.network.pokos.UserPoko
 
 interface ImagesFSHandler {

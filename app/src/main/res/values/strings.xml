@@ -7,6 +7,10 @@
     <string name="details_movie"><![CDATA[ <b>%s</b><br/><br/><b>%s</b><br/>Calificación : <b>%s</b><br/>Votos : <b>%s</b><br/>Idioma : <b>%s</b>]]></string>
     <string name="description"><![CDATA[ <b>Descripción : </b> <br/><br/>%s </b>]]></string>
     <string name="user_values">Bienvenido<![CDATA[<br/><br/><b>%s</b><br/>Id : <b> %s </b><br/>País : <b> %s </b><br/>Idioma : <b> %s </b><br/>Nombre : <b> %s </b><br/>Contenido para adultos : <b> %s</b>]]></string>
+
+    <string name="location_values"><![CDATA[ Latitud : %s Longitud : %s]]></string>
+
+
     <string name="user_image">Imágen del usuario</string>
     <string name="backdrop_image">Imagen de fondo</string>
     <string name="poster_image">Poster de la pelicula</string>
@@ -16,7 +20,6 @@
     <string name="no_registered">No registrado</string>
     <string name="no_internet">No se detecta conexión a internet</string>
     <string name="rated_by_me">Peliculas calificadas por mi</string>
-    <string name="no_provider">noprovider</string>
     <string name="my_location">Mi ubicación</string>
     <string name="no_locations">No hay ubicaciones para visualizar</string>
     <string name="get_current_location">Boton obtener ubicación actual</string>
@@ -43,4 +46,10 @@
     <string name="votes">voteAverage</string>
     <string name="vote_count">voteCount</string>
     <string name="tvalue_bar">Descripción</string>
+    <string name="channel">LOCATIONS_CHANNEL</string>
+    <string name="channel_description">Canal para notificar registros de ubicación</string>
+    <string name="register_location">Ubicación registrada en la nube</string>
+    <string name="view_locations">Ver ubicaciones guardadas</string>
+    <string name="location_on">Ubicación registrada en :</string>
+    <string name="no_values">No hay valores para mostrar</string>
 </resources>

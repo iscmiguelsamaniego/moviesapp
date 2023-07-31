@@ -1,73 +1,40 @@
 package org.samtech.exam.firebase.repositories
 
 import com.google.firebase.firestore.FirebaseFirestore
-import org.samtech.exam.firebase.models.FSLocations
+import com.google.gson.Gson
+import org.samtech.exam.firebase.models.FSLocation
 import org.samtech.exam.interfaces.LocationsFSHandler
-import org.samtech.exam.network.pokos.UserPoko
-import org.samtech.exam.utils.Constants.COLLECTION_USER
+import org.samtech.exam.utils.Constants.COLLECTION_LOCATIONS
+import org.samtech.exam.utils.Constants.STORED_MSG
+import org.samtech.exam.utils.Constants.UPDATED_MSG
 
 class FireStoreLocationsFSRepository : LocationsFSHandler {
 
     var db = FirebaseFirestore.getInstance()
-
-    /*
-       /*if (it.fsDocumentId == null) {
-       //TODO IMPLEMENT THIS FOR UPDATE ON FIRESTORE
-
-                    opUserViewModel.downloadAndStoreOrUpdateUser("")
-                } else {
-                    opUserViewModel.downloadAndStoreOrUpdateUser(it.fsDocumentId!!)
-                }*/
-
-                val urlImage = BASE_IMAGE_PATH + user.avatar!!.tmdb.avatarPath!!
-                setGlideImage(ctx, urlImage, userIView)
-
-                val adultResponse =
-                    if (it.includeAdult == true)
-                        getString(R.string.yes) else getString(R.string.no)
-
-                val nameRespose =
-                    if(it.name.isNullOrBlank())
-                        getString(R.string.no_registered) else it.name
-
-                val x = getSpannedText(getString(R.string.user_values,
-                    it.username,
-                    it.id.toString(),
-                    it.iso31661,
-                    it.iso6391,
-                    nameRespose,
-                    adultResponse))
-                userInfoTView.text = x
-    * */
-    override fun getLocationsValues(listener: LocationsFSHandler.LocationsListener): String {
+    override fun getLocation(listener: LocationsFSHandler.LocationsListener): String {
         var getResult = ""
-
-        db.collection(COLLECTION_USER)
+        var locations  = arrayListOf<FSLocation>()
+        db.collection(COLLECTION_LOCATIONS)
             .get()
             .addOnSuccessListener { result ->
-                if(!result.isEmpty) {
-                  /*  val gson = Gson()
+                if (!result.isEmpty) {
                     for (document in result) {
-                        val user = gson.toJson(document.data).toString()
-                        val userAux = gson.fromJson(user, FSLocations::class.java)
-                        val avatarObj = gson.toJson(document.data.getValue(KEY_AVATAR)).toString()
-                        val avatar = gson.fromJson(avatarObj, Avatar::class.java)
+                        val gson = Gson()
+                        val jsonLocation =
+                            gson.toJson(document.data).toString()
+                        val location =
+                            gson.fromJson(jsonLocation, FSLocation::class.java)
 
-                        listener.onLocationsResult(
-                            FSLocations(
-                                fsDocumentId = document.id,
-                                avatar = avatar,
-                                id = userAux.id,
-                                iso6391 = userAux.iso6391,
-                                iso31661 = userAux.iso31661,
-                                name = userAux.name,
-                                includeAdult = userAux.includeAdult,
-                                username = userAux.username
+                        locations.add(
+                            FSLocation(
+                                locationId = document.id,
+                                latitude = location.latitude,
+                                longitude = location.longitude,
+                                date = location.date
                             )
                         )
-                    }*/
-                }else{
-                    listener.onLocationsResult(FSLocations())
+                    }
+                    listener.onLocationsResult(locations)
                 }
             }
             .addOnFailureListener { e ->
@@ -77,12 +44,12 @@ class FireStoreLocationsFSRepository : LocationsFSHandler {
         return getResult
     }
 
-    override fun updateLocationsValues(userId: String, user: UserPoko): String {
+    override fun updateLocation(locationId: String, location: FSLocation): String {
         var updateResult = ""
 
-        db.collection(COLLECTION_USER).document(userId).set(user)
+        db.collection(COLLECTION_LOCATIONS).document(locationId).set(location)
             .addOnSuccessListener {
-                updateResult = "Valores actualizados correctamente"
+                updateResult = UPDATED_MSG
             }
             .addOnFailureListener { e ->
                 updateResult = "Error : $e.cause"
@@ -91,13 +58,13 @@ class FireStoreLocationsFSRepository : LocationsFSHandler {
         return updateResult
     }
 
-    override fun storeLocationsValues(user: UserPoko): String {
+    override fun storeLocation(location: FSLocation): String {
         var storeResult = ""
 
-        db.collection(COLLECTION_USER)
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                storeResult = "Datos almacenados correctamente"
+        db.collection(COLLECTION_LOCATIONS)
+            .add(location)
+            .addOnSuccessListener {
+                storeResult = STORED_MSG
             }
             .addOnFailureListener { e ->
                 storeResult = "Error : $e.cause"

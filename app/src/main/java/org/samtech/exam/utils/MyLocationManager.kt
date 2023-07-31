@@ -12,6 +12,8 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import org.samtech.exam.utils.Constants.FIVE_MINUTES
 import org.samtech.exam.utils.LocationUtils.hasPermission
 import java.util.concurrent.TimeUnit
 
@@ -28,13 +30,12 @@ class MyLocationManager private constructor(private val context: Context) {
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
 
-    //TODO Google Still deprecated LocationRequest
-    private val locationRequest: LocationRequest = LocationRequest().apply {
-        interval = TimeUnit.SECONDS.toMillis(60) //Changue to 5min
-        fastestInterval = TimeUnit.SECONDS.toMillis(30)
-        maxWaitTime = TimeUnit.MINUTES.toMillis(2)
-        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-    }
+    private val locationRequest =
+        LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, FIVE_MINUTES)
+            .setWaitForAccurateLocation(false)
+            .setMinUpdateIntervalMillis(FIVE_MINUTES/2)
+            .setMaxUpdateDelayMillis(TimeUnit.MINUTES.toMillis(2))
+            .build()
 
     private val locationUpdatePendingIntent: PendingIntent by lazy {
         val intent = Intent(context, LocationUpdatesBroadcastReceiver::class.java)
