@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import org.samtech.exam.R
@@ -44,22 +45,30 @@ class PhotosFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnLoadPhoto = view.findViewById<ImageButton>(R.id.fragment_add_loadphoto)
-        val btnTakePhoto = view.findViewById<ImageButton>(R.id.fragment_add_takephoto)
-        imageView = view.findViewById(R.id.fragment_add_imagetaken)
+        val galleryRV = view.findViewById<RecyclerView>(R.id.fr_photos_gallery_rv)
+        val btnLoadPhoto = view.findViewById<ImageButton>(R.id.fr_photos_gallery)
+        val btnTakePhoto = view.findViewById<ImageButton>(R.id.fr_photos_take_photo)
+        imageView = view.findViewById(R.id.fr_photos_photo_taken)
 
         btnTakePhoto.setOnClickListener(this)
         btnLoadPhoto.setOnClickListener(this)
     }
 
+    fun openGallery() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        startActivityForResult(intent, PICK_IMAGE);
+
+    }
+
     override fun onClick(v: View?) {
-        if (v?.id == R.id.fragment_add_loadphoto) {
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            gallery.type = "image/*"
-            startActivityForResult(gallery, PICK_IMAGE)
+        if (v?.id == R.id.fr_photos_gallery) {
+            openGallery()
         }
 
-        if (v?.id == R.id.fragment_add_takephoto) {
+        if (v?.id == R.id.fr_photos_take_photo) {
             Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                 takePictureIntent.resolveActivity(v.context.packageManager)?.also {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -75,19 +84,28 @@ class PhotosFragment : Fragment(), View.OnClickListener {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data!!.extras!!.get("data") as Bitmap
             imageView.setImageBitmap(imageBitmap)
-            uploadImagefromByter(imageBitmap)
+            uploadImagefromByte(imageBitmap)
         }
 
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            val imageUri = data?.data
-            imageView.setImageURI(imageUri)
-            uploadImagefromUri(imageUri)
+            if (data?.clipData != null) {
+                val count = data.clipData?.itemCount
+
+                for (i in 0 until count!!) {
+                    val multipleUri: Uri = data.clipData?.getItemAt(i)!!.uri
+                    uploadImagefromUri(multipleUri)
+                }
+
+            } else if (data?.data != null) {
+                val singleUri: Uri = data.data!!
+                imageView.setImageURI(singleUri)
+                uploadImagefromUri(singleUri)
+
+            }
         }
-
-
     }
 
-    fun uploadImagefromByter(paramBitMap: Bitmap) {
+    fun uploadImagefromByte(paramBitMap: Bitmap) {
         val storage = Firebase.storage
         val storageRef = storage.reference
             .child(UUID.randomUUID().toString())

@@ -91,7 +91,7 @@ class MoviesAdapter : ListAdapter<Movies, MoviesAdapter.UserViewHolder>(UserComp
         companion object {
             fun create(parent: ViewGroup): UserViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.rated_item, parent, false)
+                    .inflate(R.layout.movies_item, parent, false)
                 return UserViewHolder(view)
             }
         }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+        android:id="@+id/fr_photos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
@@ -27,41 +27,48 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/fragment_add_loadphoto"
+                    android:id="@+id/fr_photos_gallery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@id/fragment_add_separator"
+                    android:layout_toStartOf="@id/fr_photos_separator"
                     android:background="@color/blue_dark"
                     android:contentDescription="@string/load_image"
                     android:padding="@dimen/gen_dimen_6"
                     android:src="@drawable/ic_action_add_from_gallery" />
 
                 <View
-                    android:id="@+id/fragment_add_separator"
+                    android:id="@+id/fr_photos_separator"
                     android:layout_width="1dp"
                     android:layout_height="1dp"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="@dimen/gen_dimen_4" />
 
                 <ImageButton
-                    android:id="@+id/fragment_add_takephoto"
+                    android:id="@+id/fr_photos_take_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/fragment_add_separator"
+                    android:layout_toEndOf="@id/fr_photos_separator"
                     android:background="@color/blue"
                     android:contentDescription="@string/Take_photo"
                     android:padding="@dimen/gen_dimen_6"
                     android:src="@drawable/ic_action_take_photo" />
 
+
                 <ImageView
-                    android:id="@+id/fragment_add_imagetaken"
+                    android:id="@+id/fr_photos_photo_taken"
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
-                    android:layout_below="@id/fragment_add_loadphoto"
+                    android:layout_below="@id/fr_photos_gallery"
                     android:layout_marginTop="@dimen/gen_dimen_6"
-                    tools:background="@drawable/backdropsample"
                     android:contentDescription="@string/taken_photo"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    tools:background="@drawable/backdropsample" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fr_photos_gallery_rv"
+                    android:layout_below="@id/fr_photos_photo_taken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 

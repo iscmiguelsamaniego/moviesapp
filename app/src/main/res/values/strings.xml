@@ -52,4 +52,5 @@
     <string name="view_locations">Ver ubicaciones guardadas</string>
     <string name="location_on">Ubicación registrada en :</string>
     <string name="no_values">No hay valores para mostrar</string>
+    <string name="select_images">Elija sus imágenes</string>
 </resources>

@@ -39,7 +39,7 @@ class ServiceListenerVolley : ServiceListener {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers = HashMap<String, String>()
-                headers.put("Content-Type", "application/json")//TODO add constants?
+                headers.put("Content-Type", "application/json")
                 headers.put(AUTHORIZATION, BEARER + token)
                 return headers
             }

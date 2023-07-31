@@ -74,7 +74,7 @@ class UsersFragment : Fragment() {
                 var iso31661Value = ""
                 var iso6391Value = ""
 
-                for (user in it) { //TODO FIX
+                for (user in it) { 
                     urlAvatar = BASE_IMAGE_PATH + user.avatarPath
                     adultValue = user.includeAdult
                     nameValue = user.name.toString()
