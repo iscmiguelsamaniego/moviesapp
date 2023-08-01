@@ -7,11 +7,9 @@ Dispositivos y versiones de Android utilizados :
   - Motorola E22i Android 12
 
 Flujo :
-
-
+<br>
 Modulo Usuarios :
-
-
+<br>
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/b0aa5966-6c84-4600-a3d5-173975f2e708" width="250" height="450">
 
 Modulo Peliculas :
