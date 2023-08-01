@@ -8,17 +8,22 @@ Dispositivos y versiones de Android utilizados :
 
 Flujo :
 
+
 Modulo Usuarios :
+
+
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/b0aa5966-6c84-4600-a3d5-173975f2e708" width="250" height="450">
 
 Modulo Peliculas :
+
+
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/8612587f-46fa-466d-b74b-0e6222422c76" width="250" height="450">
 
 Peliculas
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/a6166f80-322f-4b76-bd89-3a9192134eac" width="250" height="450">
 
 Detalle de peliculas
-<img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/2bf33f78-2678-424d-9b20-18e532e66a1a">
+<img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/2bf33f78-2678-424d-9b20-18e532e66a1a" width="250" height="450">
 
 Modulo Ubicaciones :
 
