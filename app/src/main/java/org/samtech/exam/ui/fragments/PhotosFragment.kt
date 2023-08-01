@@ -13,24 +13,28 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import org.samtech.exam.R
+import org.samtech.exam.Singleton
+import org.samtech.exam.ui.viewmodels.PhotosViewModel
 import org.samtech.exam.utils.Utils.customToast
-import java.io.ByteArrayOutputStream
 import java.util.UUID
 
 
 @Suppress("DEPRECATION")
 class PhotosFragment : Fragment(), View.OnClickListener {
 
-    //TODO MAKE MVVM
-    //IMPROVE THE FLOW -> CAPTURE -> PICK ==> SHOW IMAGEVIEW => UPLOAD BUTTON
+    private val opPhotosViewModel: PhotosViewModel by activityViewModels {
+        PhotosViewModel.PhotosViewModelFactory(
+            Singleton.instance!!.photossFSRepository
+        )
+    }
+
     val REQUEST_IMAGE_CAPTURE = 1
     private lateinit var imageView: ImageView
     private val PICK_IMAGE = 100
-    private lateinit var dummyContext: Context
+    private lateinit var ctx: Context
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +42,7 @@ class PhotosFragment : Fragment(), View.OnClickListener {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_photos, container, false)
 
-        dummyContext = inflater.context
+        ctx = inflater.context
         return root
     }
 
@@ -84,7 +88,8 @@ class PhotosFragment : Fragment(), View.OnClickListener {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data!!.extras!!.get("data") as Bitmap
             imageView.setImageBitmap(imageBitmap)
-            uploadImagefromByte(imageBitmap)
+            val msgImgFromByte = opPhotosViewModel.storeImgFromByte(imageBitmap)
+            customToast(ctx, msgImgFromByte)
         }
 
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
@@ -93,53 +98,18 @@ class PhotosFragment : Fragment(), View.OnClickListener {
 
                 for (i in 0 until count!!) {
                     val multipleUri: Uri = data.clipData?.getItemAt(i)!!.uri
-                    uploadImagefromUri(multipleUri)
+                    val storeFromGalleryBulk =
+                        opPhotosViewModel.storePhoto(UUID.randomUUID().toString(), multipleUri)
+                    customToast(ctx, storeFromGalleryBulk)
                 }
 
             } else if (data?.data != null) {
                 val singleUri: Uri = data.data!!
                 imageView.setImageURI(singleUri)
-                uploadImagefromUri(singleUri)
-
+                val storeFromGalery =
+                    opPhotosViewModel.storePhoto(UUID.randomUUID().toString(), singleUri)
+                customToast(ctx, storeFromGalery)
             }
-        }
-    }
-
-    fun uploadImagefromByte(paramBitMap: Bitmap) {
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-            .child(UUID.randomUUID().toString())
-        val baos = ByteArrayOutputStream()
-        paramBitMap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        val uploadTask = storageRef.putBytes(data)
-        uploadTask.addOnFailureListener { exception ->
-            customToast(dummyContext, "Error en la carga de foto " + exception.message)
-        }
-        uploadTask.addOnSuccessListener { taskSnapshot ->
-            customToast(
-                dummyContext,
-                "La foto se ha subido de manera exitosa\n" + taskSnapshot.bytesTransferred
-            )
-        }
-    }
-
-    fun uploadImagefromUri(paramImageUri: Uri?) {
-        if (paramImageUri != null) {
-            val storage = Firebase.storage
-            val storageRef = storage.reference
-                .child(UUID.randomUUID().toString())
-
-            storageRef.putFile(paramImageUri)
-                .addOnFailureListener { exception ->
-                    customToast(dummyContext, "Error en la carga de imagen " + exception.message)
-                }
-                .addOnSuccessListener { taskSnapshot ->
-                    customToast(
-                        dummyContext,
-                        "La imagen se ha subido de manera exitosa\n" + taskSnapshot.bytesTransferred
-                    )
-                }
         }
     }
 }

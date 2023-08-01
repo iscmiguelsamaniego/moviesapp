@@ -53,7 +53,7 @@ class LocationsFragment : Fragment(), View.OnClickListener {
     private val opLocationsViewModel: LocationsViewModel by activityViewModels {
         LocationsViewModel.LocationsViewModelFactory(
             requireActivity().application,
-            Singleton.instance!!.fireStoreLocationsRepository
+            Singleton.instance!!.locationsFSRepository
         )
     }
 

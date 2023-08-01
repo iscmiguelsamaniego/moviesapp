@@ -1,4 +1,4 @@
 package org.samtech.exam.firebase.models
 
-class FSImages {
+class FSPhotos {
 }

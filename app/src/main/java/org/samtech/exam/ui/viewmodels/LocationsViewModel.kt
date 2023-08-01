@@ -6,14 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.samtech.exam.firebase.models.FSLocation
-import org.samtech.exam.firebase.repositories.FireStoreLocationsFSRepository
+import org.samtech.exam.firebase.repositories.LocationsFSRepository
 import org.samtech.exam.interfaces.LocationsFSHandler
 import org.samtech.exam.repositories.LocationsRepository
 import java.util.concurrent.Executors
 
 class LocationsViewModel(
     application: Application,
-    locationsFSRepo: FireStoreLocationsFSRepository
+    locationsFSRepo: LocationsFSRepository
 ) : ViewModel() {
 
     private val locationsFSHandler: LocationsFSHandler = locationsFSRepo
@@ -49,7 +49,7 @@ class LocationsViewModel(
     @Suppress("UNCHECKED_CAST")
     class LocationsViewModelFactory(
         private val application: Application,
-        private val locationsFSRepo: FireStoreLocationsFSRepository
+        private val locationsFSRepo: LocationsFSRepository
     ) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

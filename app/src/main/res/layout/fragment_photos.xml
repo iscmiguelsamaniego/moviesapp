@@ -64,6 +64,7 @@
                     android:scaleType="fitXY"
                     tools:background="@drawable/backdropsample" />
 
+                <!--TODO SHOW THUMBNAILS OF MULTIPLE SELECTION -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fr_photos_gallery_rv"
                     android:layout_below="@id/fr_photos_photo_taken"

@@ -8,12 +8,12 @@ import org.samtech.exam.utils.Constants.COLLECTION_LOCATIONS
 import org.samtech.exam.utils.Constants.STORED_MSG
 import org.samtech.exam.utils.Constants.UPDATED_MSG
 
-class FireStoreLocationsFSRepository : LocationsFSHandler {
+class LocationsFSRepository : LocationsFSHandler {
 
     var db = FirebaseFirestore.getInstance()
     override fun getLocation(listener: LocationsFSHandler.LocationsListener): String {
         var getResult = ""
-        var locations  = arrayListOf<FSLocation>()
+        val locations  = arrayListOf<FSLocation>()
         db.collection(COLLECTION_LOCATIONS)
             .get()
             .addOnSuccessListener { result ->
