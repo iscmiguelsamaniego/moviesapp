@@ -6,7 +6,8 @@ Dispositivos y versiones de Android utilizados :
   - Motorola Z3 Android 9
   - Motorola E22i Android 12
 
-Flujo :
+**Flujo del app**
+
 <br><br>
 Modulo Usuarios :
 <br><br>
@@ -17,9 +18,11 @@ Modulo Peliculas :
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/a6166f80-322f-4b76-bd89-3a9192134eac" width="250" height="450">
 <br><br>
 Detalle de peliculas
+<br><br>
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/2bf33f78-2678-424d-9b20-18e532e66a1a" width="250" height="450">
 <br><br>
 Modulo Ubicaciones :
+<br><br>
 <img src="https://github.com/iscmiguelsamaniego/moviesapp/assets/11413770/8612587f-46fa-466d-b74b-0e6222422c76" width="250" height="450">
 <br><br>
 Notificacion registro de ubicación :
