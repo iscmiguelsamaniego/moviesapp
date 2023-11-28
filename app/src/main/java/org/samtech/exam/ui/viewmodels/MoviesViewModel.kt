@@ -1,6 +1,8 @@
 package org.samtech.exam.ui.viewmodels
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -50,28 +52,86 @@ class MoviesViewModel(private val resultsRepo: MoviesRepository) : ViewModel() {
     }
 
     private fun serialize(ctx: Context, paramResponse: String, paramType: String) {
+        var errorMsg = ""
         if (paramResponse.isNotBlank()) {
             val objValues = Gson().fromJson(paramResponse, MoviesPoko::class.java)
             for (results in objValues.results) {
-                insertMovies(
-                    Movies(
-                        results.id,
-                        paramType,
-                        results.adult,
-                        Utils.customValidate(ctx, results.backdropPath!!),
-                        results.genreIds.toString(),
-                        Utils.customValidate(ctx, results.originalLanguage!!),
-                        Utils.customValidate(ctx, results.originalTitle!!),
-                        Utils.customValidate(ctx, results.overview!!),
-                        results.popularity,
-                        Utils.customValidate(ctx, results.posterPath!!),
-                        results.releaseDate,
-                        Utils.customValidate(ctx, results.title!!),
-                        results.video,
-                        results.voteAverage,
-                        results.voteCount
-                    )
-                )
+                if (results.id != null) {
+                if (paramType.isNotBlank()) {
+                if (!results.backdropPath.isNullOrBlank()) {
+                    if (results.originalLanguage != null) {
+                    if (results.originalTitle != null) {
+                    if (results.overview != null) {
+                        if (results.popularity != null) {
+                        if (results.posterPath != null) {
+                        if (results.releaseDate != null) {
+                        if (results.title != null) {
+                        if (results.video != null) {
+                        if (results.voteAverage != null) {
+                        if (results.voteAverage != null) {
+                        insertMovies(
+                            Movies(
+                                results.id,
+                                paramType,
+                                results.adult,
+                                Utils.customValidate(ctx, results.backdropPath!!),
+                                results.genreIds.toString(),
+                                Utils.customValidate(ctx, results.originalLanguage!!),
+                                Utils.customValidate(ctx, results.originalTitle!!),
+                                Utils.customValidate(ctx, results.overview!!),
+                                results.popularity,
+                                Utils.customValidate(ctx, results.posterPath!!),
+                                results.releaseDate,
+                                Utils.customValidate(ctx, results.title!!),
+                                results.video,
+                                results.voteAverage,
+                                results.voteCount
+                            )
+                        )
+                        }else{
+                            errorMsg = "voteCount vacio"
+                        }
+                        }else{
+                            errorMsg = "voteAverage vacio"
+                        }
+                        }else{
+                            errorMsg = "video vacio"
+                        }
+                        }else{
+                            errorMsg = "title vacio"
+                        }
+                        }else{
+                            errorMsg = "releaseDate vacio"
+                        }
+                        }else{
+                            errorMsg = "posterPath vacio"
+                        }
+                        }else{
+                            errorMsg = "popularity vacio"
+                        }
+                    }else{
+                        errorMsg = "overview vacio"
+                    }
+                    }else{
+                        errorMsg = "originalTitle vacio"
+                    }
+                    }else{
+                        errorMsg = "genreIds vacio"
+                    }
+                }else{
+                    errorMsg = "backdrop vacio"
+                }
+                }else{
+                    errorMsg = "typo vacio"
+
+                }
+                } else {
+                    errorMsg = "id vacio"
+                }
+
+                if(errorMsg.isNotBlank()) {
+                    Log.d("ERROR",errorMsg)
+                }
             }
         }
     }
